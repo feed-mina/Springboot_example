@@ -7,7 +7,8 @@ public enum BaseResponseCode {
 	LOGIN_REQUIRED(200),
 	DATA_IS_NULL(500), // 실패
 
-	VALIDATE_REQUIRED(200);
+	VALIDATE_REQUIRED(200),
+	UPLOAD_FILE_IS_NULL(500);
 	
 	private int status;
 	

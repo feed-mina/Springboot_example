@@ -3,12 +3,15 @@ package kr.so.java.configuration;
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -22,6 +25,12 @@ import kr.so.java.mvc.domain.BaseCodeLabelEnum;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
+	@Autowired
+	private GlobalConfig config;
+	
+	private static final String WINDOWS_FILE = "file:///";
+	private static final String LINUX_FILE = "file:";
+	
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -71,5 +80,25 @@ public class WebConfiguration implements WebMvcConfigurer {
 		resolvers.add(new PageRequestHandleMethodArgumentResolver());
 	}
 	
-
+	
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// 업로드 파일 static resource 접근 경로
+		String resourcePattern = config.getUploadResourcePath()+"**";
+		
+		// 로컬(윈도우 환경)
+		if(config.isLocal()) {
+			registry.addResourceHandler(resourcePattern).addResourceLocations("file:///" + config.getUploadFilePath());
+		} else {
+			// 리눅스 또는 유닉스 환경
+			registry.addResourceHandler(resourcePattern).addResourceLocations("file: "+config.getUploadFilePath());
+		}
+		
+	}
+	
 }
