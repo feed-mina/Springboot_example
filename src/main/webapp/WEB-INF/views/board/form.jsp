@@ -54,15 +54,14 @@
 					type : 'post',
 					data : $form.serialize(), 
 					dataType : 'json',
-					success : function(data) {
-						if(data.code == 'SUCCESS'){
+					success : function(response) {
+						console.log(response);
+						if(response.code == 'SUCCESS'){
 							alert('저장되었습니다.');
+							location.href = '/${menuType}/' + response.data;
 						}else{
 							alert(data.message);
-						} 
-						console.log(data);
-						console.log(data.code);
-						console.log(data.message); 
+						}  
 					}
 				});
 				return false;

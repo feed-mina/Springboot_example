@@ -80,6 +80,8 @@ public class BoardController {
 	public String list(@PathVariable MenuType menuType, BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
 		logger.info("menuType:{}", menuType);
 		logger.info("pageRequest : {}", pageRequest);
+		
+		parameter.setBoardTypes(menuType.boardType());
 		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(
 				pageRequest, parameter);
 

@@ -9,6 +9,8 @@ import lombok.Data;
 public class BoardSearchParameter {
 
 	private String keyword;
+	private BoardType boardType;
+	
 	//private List<BoardType> boardTypes;
 	private BoardType[] boardTypes;
 	

@@ -50,16 +50,7 @@
 						placeholder="<spring:message code="placeholder.required" />">
 				</div>
 			</div>
-			<!-- 
-			<div class="row mb-3">
-				<label for="contents" class="col-sm-2 col-form-label"><spring:message
-						code="board.contents" /></label>
-				<div class="col-sm-10">
-					<textarea class="form-control"  name="contents" id="contents"
-						placeholder="<spring:message code="placeholder.required" />">${board.contents}</textarea>
-				</div>
-			</div>
-			 -->
+		 
 			<button type="submit" class="btn btn-primary">
 				<spring:message code="button.search" />
 			</button>
