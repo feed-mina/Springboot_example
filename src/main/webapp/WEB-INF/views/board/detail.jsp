@@ -33,10 +33,10 @@
 		</div>
 
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-			<a href="/board/list" class="btn btn-primary me-md-2" type="button"><spring:message
-					code="button.list" /></a> <a href="/board/edit/${board.boardSeq}"
-				class="btn btn-primary" type="button"><spring:message
-					code="button.edit" /></a>
+			<a href="/${menuType}" class="btn btn-primary me-md-2" type="button">
+			<spring:message	code="button.list" /></a> 
+			<a href="/${menuType}/edit/${board.boardSeq}" class="btn btn-primary" type="button">
+			<spring:message	code="button.edit" /></a>
 		</div>
 
 		<form id="form" method="get" action="/list">
@@ -67,30 +67,7 @@
 	</div>
 
 	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-	<script>
-		$(function() {
-			var $form = $('#form');
-			$form.bind('submit', function() {
-				$.ajax({
-					url : '/board/save',
-					type : 'post',
-					data : $form.serialize(), 
-					dataType : 'json',
-					success : function(data) {
-						if(data.code == 'SUCCESS'){
-							alert('저장되었습니다.');
-						}else{
-							alert(data.message);
-						} 
-						console.log(data);
-						console.log(data.code);
-						console.log(data.message); 
-					}
-				});
-				return false;
-			});
-		});
-	</script>
+	 
 	<table class="table caption-top">
 		<thead>
 			<tr>

@@ -78,32 +78,37 @@ public class BoardController {
 
 	@GetMapping("/{menuType}")
 	public String list(@PathVariable MenuType menuType, BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
+		logger.info("menuType:{}", menuType);
 		logger.info("pageRequest : {}", pageRequest);
 		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(
 				pageRequest, parameter);
 
 		List<Board> boardList = boardService.getList(pageRequestParameter);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("menuType", menuType);
 		return "/board/list";
 	}
 
 
 	
-	@GetMapping("/detail/{boardSeq}")
-	public String detail(@PathVariable int boardSeq, Model model) {
+	@GetMapping("/{menuType}/{boardSeq}")
+	public String detail(@PathVariable MenuType menuType, @PathVariable int boardSeq, Model model) {
 		Board board = boardService.get(boardSeq);
 		if (board == null) {
 			throw new BaseException(BaseResponseCode.DATA_IS_NULL, new String[] { "게시물" });
 		}
 		model.addAttribute("board", board);
+		model.addAttribute("menuType", menuType);
 		return "/board/detail";
 	}
 	// 등록 화면
 	
-	@GetMapping("/form")
+	@GetMapping("/{menuType}/form")
 	@RequestConfig(loginCheck = false)
-	public void form(BoardParameter parameter, Model model) {
+	public String form(@PathVariable MenuType menuType, BoardParameter parameter, Model model) {
 		model.addAttribute("parameter", parameter);
+		model.addAttribute("menuType", menuType);
+		return "/board/form";
 
 	}
 
@@ -111,9 +116,9 @@ public class BoardController {
 	
 	// 수정화면
 	
-	@GetMapping("/edit/{boardSeq}")
+	@GetMapping("/{menuType}/edit/{boardSeq}")
 	@RequestConfig(loginCheck = false)
-	public String edit(@PathVariable(required = true) int boardSeq, BoardParameter parameter,  Model model) {
+	public String edit(@PathVariable MenuType menuType, @PathVariable(required = true) int boardSeq, BoardParameter parameter,  Model model) {
 
 		Board board = boardService.get(parameter.getBoardSeq());
 		if(board == null) {
@@ -122,6 +127,7 @@ public class BoardController {
 		}
 		model.addAttribute("board", board);
 		model.addAttribute("parameter", parameter);
+		model.addAttribute("menuType", menuType);
 		return "/board/form";
 	}
 
@@ -129,7 +135,7 @@ public class BoardController {
 	
 
 	// 등록 화면
-	@PostMapping("/save")
+	@PostMapping("/{menuType}/save")
 	@RequestConfig(loginCheck = false)
 	@ResponseBody
 	@ApiOperation(value = "등록 / 수정 처리", notes = "신규 게시물 저장 및 기존 게시물 업데이트가 가능합니다.")

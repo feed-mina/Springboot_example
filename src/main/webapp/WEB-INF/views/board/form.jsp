@@ -50,7 +50,7 @@
 			var $form = $('#form');
 			$form.bind('submit', function() {
 				$.ajax({
-					url : '/board/save',
+					url : '/${menuType}/save',
 					type : 'post',
 					data : $form.serialize(), 
 					dataType : 'json',
