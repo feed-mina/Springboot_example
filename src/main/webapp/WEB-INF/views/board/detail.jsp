@@ -20,6 +20,26 @@
 
 	
 	<div class="container">
+	
+	<div class="card">
+  <div class="card-header">
+    ${board.title}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>${board.contents}</p>
+      <footer class="blockquote-footer">
+      <fmt:formatDate value="${board.regDate}" pattern="yyyy.MM.dd HH:mm"/>
+      </footer>
+    </blockquote>
+  </div>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+  <a href="/board/list" class="btn btn-primary me-md-2" type="button"><spring:message code="button.list"/></a>
+  <a href="/board/edit/${board.boardSeq}" class="btn btn-primary" type="button"><spring:message code="button.edit"/></a>
+</div>
+	
 		<form id="form" method="get" action="/list">
 			<input type="hidden" name="boardType" value="COMMUNITY" />
 			<div class="row mb-3">
@@ -85,7 +105,7 @@
   <c:forEach var="board" items="${boardList}" varStatus="status">
     <tr>
       <th scope="row">${status.count}</th>
-      <td><a href="/board/${board.boardSeq}">${board.title}</a></td>
+      <td><a href="/board/${boardSeq}">${board.title}</a></td>
       <td>${board.viewCount}</td>
       <td><fmt:formatDate value="${board.regDate}" pattern="yyyy.MM.dd HH:mm"/></td>
       <td>@¿¹¸°</td>
@@ -101,9 +121,18 @@
   </tbody>
 </table>
 	
-<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2"> 
-  <a href="/board/form" class="btn btn-primary" type="button"><spring:message code="button.form"/></a>
+	<div class="card">
+  <div class="card-header">
+    Quote
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>A well-known quote, contained in a blockquote element.</p>
+      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+  </div>
 </div>
+	
 	
 </body>
 </html>

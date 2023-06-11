@@ -46,45 +46,74 @@ public class BoardController {
 
 	// @ResponseBody
 	// @ApiOperation(value = "목록 조회", notes = "게시물 정보를 조회할 수 있씁니다.")
+	/*
+	 * @GetMapping("/list") public BaseResponse<List<Board>> list(
+	 * 
+	 * @ApiParam BoardSearchParameter parameter,
+	 * 
+	 * @ApiParam PageRequest pageRequest, Model model) {
+	 * 
+	 * logger.info("pageRequest : {}", pageRequest);
+	 * PageRequestParameter<BoardSearchParameter> pageRequestParameter = new
+	 * PageRequestParameter<BoardSearchParameter>( pageRequest, parameter);
+	 * 
+	 * List<Board> boardList = boardService.getList(pageRequestParameter);
+	 * model.addAttribute("boardList", boardList); return new
+	 * BaseResponse<List<Board>>(boardService.getList(pageRequestParameter)); }
+	 * 
+	 */
 	@GetMapping("/list")
-	public BaseResponse<List<Board>> list(
-			@ApiParam BoardSearchParameter parameter,
-			@ApiParam PageRequest pageRequest, Model model) {
-
+	public void list(BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
 		logger.info("pageRequest : {}", pageRequest);
 		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(
 				pageRequest, parameter);
-		
+
 		List<Board> boardList = boardService.getList(pageRequestParameter);
 		model.addAttribute("boardList", boardList);
-		return new BaseResponse<List<Board>>(boardService.getList(pageRequestParameter));
 	}
 
+	// 상세페이지
+
 	@GetMapping("/{boardSeq}")
-	@ResponseBody
-	@ApiOperation(value = "상세조회", notes = "게시물 번호에 해당하는 상세 정보를 조회할 수 있씁니다.")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "boardSeq", value = "게시물 번호", example = "1") })
-	public BaseResponse<Board> get(@PathVariable int boardSeq) {
+	public String detail(@PathVariable int boardSeq, Model model) {
 		Board board = boardService.get(boardSeq);
 		if (board == null) {
 			throw new BaseException(BaseResponseCode.DATA_IS_NULL, new String[] { "게시물" });
 		}
-		return new BaseResponse<Board>(board);
+		model.addAttribute("board", board);
+		return "/board/detail";
 	}
-
+	// 등록 화면
+	
 	@GetMapping("/form")
 	@RequestConfig(loginCheck = false)
 	public void form(BoardParameter parameter, Model model) {
-		if (parameter.getBoardSeq() > 0) {
-			Board board = boardService.get(parameter.getBoardSeq());
-			model.addAttribute("board", board);
-		}
 		model.addAttribute("parameter", parameter);
 
 	}
 
-	// 등록 / 수정 처리
 
+	
+	// 수정화면
+	
+	@GetMapping("/edit/{boardSeq}")
+	@RequestConfig(loginCheck = false)
+	public String edit(@PathVariable(required = true) int boardSeq, BoardParameter parameter,  Model model) {
+
+		Board board = boardService.get(parameter.getBoardSeq());
+		if(board == null) {
+			throw new BaseException(BaseResponseCode.DATA_IS_NULL, new String[] { "게시물" });
+			
+		}
+		model.addAttribute("board", board);
+		model.addAttribute("parameter", parameter);
+		return "/board/form";
+	}
+
+
+	
+
+	// 등록 화면
 	@PostMapping("/save")
 	@RequestConfig(loginCheck = false)
 	@ResponseBody
