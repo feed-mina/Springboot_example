@@ -2,8 +2,8 @@
 	pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,28 +18,27 @@
 </head>
 <body>
 
-	
-	<div class="container">
-	
-	<div class="card">
-  <div class="card-header">
-    ${board.title}
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>${board.contents}</p>
-      <footer class="blockquote-footer">
-      <fmt:formatDate value="${board.regDate}" pattern="yyyy.MM.dd HH:mm"/>
-      </footer>
-    </blockquote>
-  </div>
-</div>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-  <a href="/board/list" class="btn btn-primary me-md-2" type="button"><spring:message code="button.list"/></a>
-  <a href="/board/edit/${board.boardSeq}" class="btn btn-primary" type="button"><spring:message code="button.edit"/></a>
-</div>
-	
+	<div class="container">
+
+		<div class="card">
+			<div class="card-header">${board.title}</div>
+			<div class="card-body">
+				<blockquote class="blockquote mb-0">
+					<p>${board.contents}</p>
+					<footer class="blockquote-footer"> <fmt:formatDate
+						value="${board.regDate}" pattern="yyyy.MM.dd HH:mm" /> </footer>
+				</blockquote>
+			</div>
+		</div>
+
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+			<a href="/board/list" class="btn btn-primary me-md-2" type="button"><spring:message
+					code="button.list" /></a> <a href="/board/edit/${board.boardSeq}"
+				class="btn btn-primary" type="button"><spring:message
+					code="button.edit" /></a>
+		</div>
+
 		<form id="form" method="get" action="/list">
 			<input type="hidden" name="boardType" value="COMMUNITY" />
 			<div class="row mb-3">
@@ -51,7 +50,7 @@
 						placeholder="<spring:message code="placeholder.required" />">
 				</div>
 			</div>
-<!-- 
+			<!-- 
 			<div class="row mb-3">
 				<label for="contents" class="col-sm-2 col-form-label"><spring:message
 						code="board.contents" /></label>
@@ -66,7 +65,7 @@
 			</button>
 		</form>
 	</div>
-	
+
 	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 	<script>
 		$(function() {
@@ -92,47 +91,35 @@
 			});
 		});
 	</script>
-	<table class="table caption-top"> 
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col"><spring:message code="board.title"/></th>
-      <th scope="col"><spring:message code="board.viewCount"/></th>
-      <th scope="col"><spring:message code="board.regDate"/></th>
-    </tr>
-  </thead>
-  <tbody>
-  <c:forEach var="board" items="${boardList}" varStatus="status">
-    <tr>
-      <th scope="row">${status.count}</th>
-      <td><a href="/board/${boardSeq}">${board.title}</a></td>
-      <td>${board.viewCount}</td>
-      <td><fmt:formatDate value="${board.regDate}" pattern="yyyy.MM.dd HH:mm"/></td>
-      <td>@예린</td>
-    </tr>
-    </c:forEach>
-    
-    <c:if test="{fn:length(boardList) == 0}">
-    <tr>
-    <td colspan="4"><spring:message code="msg.board.empty"/></td>
-    </tr>
-    </c:if>
-   
-  </tbody>
-</table>
-	
-	<div class="card">
-  <div class="card-header">
-    Quote
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>A well-known quote, contained in a blockquote element.</p>
-      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-	
-	
+	<table class="table caption-top">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col"><spring:message code="board.title" /></th>
+				<th scope="col"><spring:message code="board.viewCount" /></th>
+				<th scope="col"><spring:message code="board.regDate" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="board" items="${boardList}" varStatus="status">
+				<tr>
+					<th scope="row">${status.count}</th>
+					<td><a href="/board/${boardSeq}">${board.title}</a></td>
+					<td>${board.viewCount}</td>
+					<td><fmt:formatDate value="${board.regDate}"
+							pattern="yyyy.MM.dd HH:mm" /></td>
+					<td>@예린</td>
+				</tr>
+			</c:forEach>
+
+			<c:if test="{fn:length(boardList) == 0}">
+				<tr>
+					<td colspan="4"><spring:message code="msg.board.empty" /></td>
+				</tr>
+			</c:if>
+
+		</tbody>
+	</table>
+ 
 </body>
 </html>

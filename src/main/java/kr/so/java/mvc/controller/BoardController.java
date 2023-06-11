@@ -22,8 +22,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import kr.so.java.configuration.exception.BaseException;
 import kr.so.java.configuration.http.BaseResponse;
 import kr.so.java.configuration.http.BaseResponseCode;
@@ -31,12 +29,13 @@ import kr.so.java.framework.data.domain.PageRequest;
 import kr.so.java.framework.data.domain.PageRequestParameter;
 import kr.so.java.framework.data.web.RequestConfig;
 import kr.so.java.mvc.domain.Board;
+import kr.so.java.mvc.domain.MenuType;
 import kr.so.java.mvc.parameter.BoardParameter;
 import kr.so.java.mvc.parameter.BoardSearchParameter;
 import kr.so.java.mvc.service.BoardService;
 
 @Controller
-@RequestMapping("/board")
+// @RequestMapping("/board")
 @Api(tags = "게시판 Api")
 public class BoardController {
 	Logger logger = LoggerFactory.getLogger(getClass());
@@ -62,6 +61,8 @@ public class BoardController {
 	 * BaseResponse<List<Board>>(boardService.getList(pageRequestParameter)); }
 	 * 
 	 */
+
+	
 	@GetMapping("/list")
 	public void list(BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
 		logger.info("pageRequest : {}", pageRequest);
@@ -74,7 +75,21 @@ public class BoardController {
 
 	// 상세페이지
 
-	@GetMapping("/{boardSeq}")
+
+	@GetMapping("/{menuType}")
+	public String list(@PathVariable MenuType menuType, BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
+		logger.info("pageRequest : {}", pageRequest);
+		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(
+				pageRequest, parameter);
+
+		List<Board> boardList = boardService.getList(pageRequestParameter);
+		model.addAttribute("boardList", boardList);
+		return "/board/list";
+	}
+
+
+	
+	@GetMapping("/detail/{boardSeq}")
 	public String detail(@PathVariable int boardSeq, Model model) {
 		Board board = boardService.get(boardSeq);
 		if (board == null) {

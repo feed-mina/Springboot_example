@@ -28,3 +28,4 @@ public enum BoardType implements BaseCodeLabelEnum{
 	
 	
 }
+
