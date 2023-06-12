@@ -18,8 +18,8 @@
 
 	<div class="container">
 		<form id="form" method="post" action="/save">
-		<input type="hidden" name="boardSeq" value="${board == null? 0 : board.boardSeq }"/>
-			<input type="hidden" name="boardType" value="COMMUNITY" />
+			<input type="hidden" name="boardSeq"
+				value="${board == null? 0 : board.boardSeq }" />
 			<div class="row mb-3">
 				<label for="title" class="col-sm-2 col-form-label"><spring:message
 						code="board.title" /></label>
@@ -33,7 +33,7 @@
 				<label for="contents" class="col-sm-2 col-form-label"><spring:message
 						code="board.contents" /></label>
 				<div class="col-sm-10">
-					<textarea class="form-control"  name="contents" id="contents"
+					<textarea class="form-control" name="contents" id="contents"
 						placeholder="<spring:message code="placeholder.required" />">${board.contents}</textarea>
 				</div>
 			</div>
@@ -52,16 +52,16 @@
 				$.ajax({
 					url : '/${menuType}/save',
 					type : 'post',
-					data : $form.serialize(), 
+					data : $form.serialize(),
 					dataType : 'json',
 					success : function(response) {
 						console.log(response);
-						if(response.code == 'SUCCESS'){
+						if (response.code == 'SUCCESS') {
 							alert('저장되었습니다.');
 							location.href = '/${menuType}/' + response.data;
-						}else{
+						} else {
 							alert(data.message);
-						}  
+						}
 					}
 				});
 				return false;

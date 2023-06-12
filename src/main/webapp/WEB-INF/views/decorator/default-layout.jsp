@@ -9,13 +9,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+	<style type="text/css">
+	.active{color: red !important;}
+	</style>
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <sitemesh:write property="head" />
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="#">Yerin Spring Boot</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -24,17 +33,31 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
+				<li class="nav-item"><a class="nav-link"
 					aria-current="page" href="/">Home</a></li>
+				
+				<!-- 
+				
+				<c:forEach var="menu" items="${menuTypes}">
 				<li class="nav-item">
-				<a class="nav-link" href="/community"><spring:message code="menu.community" /></a> 
-				<a class="nav-link" href="/notice"><spring:message 	code="menu.notice" /></a> 
-				<a class="nav-link" href="/faq"><spring:message code="menu.faq" /></a> 
-				<a class="nav-link" href="/inquary"><spring:message code="menu.inquary" /></a>
-				</li>
-
-		 
+				<a class="nav-link ${menu == menuType ? 'active' : '' }" href="${menu.url()}"><spring:message code="${menu.menuCode()}" />
+				</a></li> 
+				</c:forEach>
+				 -->
+			
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'community' ? 'active' : '' }" href="/community"><spring:message code="menu.community" /></a></li> 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'notice' ? 'active' : '' }" href="/notice"><spring:message 	code="menu.notice" /></a></li> 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'faq' ? 'active' : '' }" href="/faq"><spring:message code="menu.faq" /></a></li> 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'inquiry' ? 'active' : '' }" href="/inquary"><spring:message code="menu.inquary" /></a></li>
+				
+			<!-- 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'notice' ? 'active' : '' }" href="/notice"><spring:message 	code="menu.notice" /></a></li> 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'faq' ? 'active' : '' }" href="/faq"><spring:message code="menu.faq" /></a></li> 
+				<li class="nav-item"><a class="nav-link ${menuType.name() == 'inquiry' ? 'active' : '' }" href="/inquary"><spring:message code="menu.inquary" /></a></li>
+			
+			 -->
 			</ul>
+			
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search"
 					aria-label="Search">

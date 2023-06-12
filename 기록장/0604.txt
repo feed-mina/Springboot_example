@@ -1,0 +1,430 @@
+. DB 연동 설정
+
+ 
+<!-- DB 연동 설정 -->
+<s:authentication-manager>
+	<s:authentication-provider user-service-ref="userLoginService">
+	</s:authentication-provider>
+</s:authentication-manager>
+ 
+
+DB의 데이터(ID, PW, 권한)을 스프링에 전달해주는 클래스의 Bean 객체 이름을 아래와 같이 래퍼런스로 제공해주면 나머지는 스프링 security가 알아서 인증 로직을 수행합니다. 이 클래스를 작성하는 방법은 다음글을 참조하시면 됩니다.
+
+ 
+
+* user-service-ref="DB인증을 처리할 Bean 객체 이름"
+
+2023-06-04 21:54:24.755 31 35m20680 2m--- 2m[  restartedMain] 36mcom.zaxxer.hikari.HikariConfig           2m: HikariPool-1 - jdbcUrl is required with driverClassName
+
+
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2m2023-06-04 21:54:26.805 31 35m20680 2m--- 2m[  restartedMain] 36mo.s.boot.SpringApplication               2m: Application run failed
+
+org.springframework.context.ApplicationContextException: Failed to start bean 'documentationPluginsBootstrapper'; nested exception is java.lang.NullPointerException: Cannot invoke "org.springframework.web.servlet.mvc.condition.PatternsRequestCondition.getPatterns()" because "this.condition" is null
+
+2023-06-04 22:00:57.392
+com.zaxxer.hikari.HikariConfig     
+HikariPool-1 - jdbcUrl is required with driverClassName.
+2023-06-04 22:00:57.394
+restartedMain
+o.s.b.web.embedded.tomcat.TomcatStarter
+Error starting Tomcat context. Exception: org.springframework.beans.factory.BeanCreationException. Message:
+ Error creating bean with name 'h2Console' defined in class path resource [org/springframework/boot/autoconfigure/h2/H2ConsoleAutoConfiguration.class]:
+ Bean instantiation via factory method failed; 
+nested exception is org.springframework.beans.BeanInstantiationException: 
+Failed to instantiate [org.springframework.boot.web.servlet.ServletRegistrationBean]: 
+Factory method 'h2Console' threw exception; 
+nested exception is java.lang.IllegalArgumentException:
+ jdbcUrl is required with driverClassName.
+
+
+
+ Factory method 'h2Console' threw exception; nested exception is java.lang.IllegalArgumentException: jdbcUrl is required with driverClassName.
+ 
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'namedParameterJdbcTemplate' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/NamedParameterJdbcTemplateConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate]: Factory method 'namedParameterJdbcTemplate' threw exception; nested exception is java.lang.NoClassDefFoundError: org/springframework/util/ConcurrentLruCache
+
+
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v2.3.4.RELEASE)[0;39m
+
+[2m2023-06-04 22:16:52.927[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mkr.so.java.ExampleSpringApplication     [0;39m [2m:[0;39m Starting ExampleSpringApplication on DESKTOP-BSKEU0A with PID 19468 (C:\DEV\eclipse-workspace\example-spring\target\classes started by MSH in C:\DEV\eclipse-workspace\example-spring)
+[2m2023-06-04 22:16:52.932[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mkr.so.java.ExampleSpringApplication     [0;39m [2m:[0;39m No active profile set, falling back to default profiles: default
+[2m2023-06-04 22:16:53.033[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2m2023-06-04 22:16:53.034[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36m.e.DevToolsPropertyDefaultsPostProcessor[0;39m [2m:[0;39m For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2m2023-06-04 22:16:55.263[0;39m [33m WARN[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.m.s.mapper.ClassPathMapperScanner     [0;39m [2m:[0;39m No MyBatis mapper was found in '[kr.so.java]' package. Please check your configuration.
+[2m2023-06-04 22:16:56.185[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 8080 (http)
+[2m2023-06-04 22:16:56.200[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.apache.catalina.core.StandardService  [0;39m [2m:[0;39m Starting service [Tomcat]
+[2m2023-06-04 22:16:56.201[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36morg.apache.catalina.core.StandardEngine [0;39m [2m:[0;39m Starting Servlet engine: [Apache Tomcat/9.0.38]
+[2m2023-06-04 22:16:56.525[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring embedded WebApplicationContext
+[2m2023-06-04 22:16:56.525[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 3491 ms
+[2m2023-06-04 22:16:56.620[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mcom.zaxxer.hikari.HikariDataSource      [0;39m [2m:[0;39m HikariPool-1 - Starting...
+[2m2023-06-04 22:16:56.863[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mcom.zaxxer.hikari.HikariDataSource      [0;39m [2m:[0;39m HikariPool-1 - Start completed.
+[2m2023-06-04 22:16:56.874[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.a.h2.H2ConsoleAutoConfiguration   [0;39m [2m:[0;39m H2 console available at '/h2-console'. Database available at 'jdbc:h2:tcp://localhost/~/test'
+[2m2023-06-04 22:16:57.727[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.s.concurrent.ThreadPoolTaskExecutor [0;39m [2m:[0;39m Initializing ExecutorService 'applicationTaskExecutor'
+[2m2023-06-04 22:16:57.785[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.a.OptionalLiveReloadServer      [0;39m [2m:[0;39m LiveReload server is running on port 35729
+[2m2023-06-04 22:16:58.298[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 8080 (http) with context path ''
+[2m2023-06-04 22:16:58.605[0;39m [32m INFO[0;39m [35m19468[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mkr.so.java.ExampleSpringApplication     [0;39m [2m:[0;39m Started ExampleSpringApplication in 6.447 seconds (JVM running for 8.052)
+
+
+
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2m2023-06-05 14:58:22.233[0;39m [31mERROR[0;39m [35m8500[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mo.s.b.d.LoggingFailureAnalysisReporter  [0;39m [2m:[0;39m 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of method sqlSessionFactory in kr.so.java.configuration.MybatisConfiguration required a bean of type 'org.apache.catalina.core.ApplicationContext' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.apache.catalina.core.ApplicationContext' in your configuration.
+
+-------------------------->
+
+
+
+import org.apache.catalina.core.ApplicationContext; 를 
+
+import org.springframework.context.ApplicationContext; 로 변환
+
+ Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource
+
+
+IOException: Failed to parse mapping resource:  
+
+
+==================================================
+
+shift + art +R : 한번에 바꾼다.
+
+
+[2m2023-06-05 16:15:17.435[0;39m [33m WARN[0;39m [35m15720[0;39m [2m---[0;39m [2m[  restartedMain][0;39m [36mConfigServletWebServerApplicationContext[0;39m [2m:[0;39m Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardController': Unsatisfied dependency expressed through field 'boardService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardService': Unsatisfied dependency expressed through field 'repository'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardRepository' defined in file [C:\DEV\eclipse-workspace\example-spring\target\classes\kr\so\java\mvc\repository\BoardRepository.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [kr/so/java/configuration/MybatisConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'
+
+=========================================================
+
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardController': Unsatisfied dependency expressed through field 'boardService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardService': Unsatisfied dependency expressed through field 'repository'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardRepository' defined in file [C:\DEV\eclipse-workspace\example-spring\target\classes\kr\so\java\mvc\repository\BoardRepository.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [kr/so/java/configuration/MybatisConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject
+	
+	
+org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'
+	 
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardService': Unsatisfied dependency expressed through field 'repository'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardRepository' defined in file [C:\DEV\eclipse-workspace\example-spring\target\classes\kr\so\java\mvc\repository\BoardRepository.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [kr/so/java/configuration/MybatisConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject
+	
+	
+	
+	
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'boardRepository' defined in file [C:\DEV\eclipse-workspace\example-spring\target\classes\kr\so\java\mvc\repository\BoardRepository.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [kr/so/java/configuration/MybatisConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'	
+	
+	
+	
+
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [kr/so/java/configuration/MybatisConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'	
+
+Caused by: java.io.IOException: Failed to parse mapping resource: 'class path resource [mybatis/sql/Board.xml]'
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'class path resource [mybatis/sql/Board.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.co.java.mvc.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.co.java.mvc.domain.Board
+
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.co.java.mvc.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.co.java.mvc.domain.Board	
+
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.co.java.mvc.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.co.java.mvc.domain.Board	
+Caused by: java.lang.ClassNotFoundException: Cannot find class: 
+"kr.co.java.mvc.domain.Board"
+	
+
+	===================================================
+	2023년 06월 25일
+	해결방법
+	parameterType을 잘못 적음
+	parameterType="kr.co.java.mvc.domain.Board"
+	parameterType="kr.so.java.mvc.domain.Board" 로 바꿈 
+	
+	http://localhost:8080/swagger-ui/
+	
+	
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [springfox.boot.starter.autoconfigure.OpenApiAutoConfiguration]; nested exception is java.io.FileNotFoundException: class path resource [springfox/documentation/spring/web/SpringfoxWebConfiguration.class] cannot be opened because it does not exist
+	
+	
+	
+	
+	
+	===================================================
+
+
+[2m2023-06-05 18:34:19.871[0;39m [31mERROR[0;39m [35m19096[0;39m [2m---[0;39m [2m[io-8080-exec-10][0;39m [36mo.a.c.c.C.[.[.[/].[dispatcherServlet]   [0;39m [2m:[0;39m Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+	SUCCESS cannot be resolved or is not a field
+] with root cause
+
+java.lang.Error: Unresolved compilation problem: 
+	SUCCESS cannot be resolved or is not a field
+	
+	SUCCESS = 정상적으로 처리되었습니다.
+	ERROR = 오류가 발생했습니다.
+	DATA_IS_NULL = 요청하신{0} 데이터는 Null 입니다.
+	VALIDATE_REQUIRED = {0}({1}) 필드는 필수로 입력하셔야 합니다.
+
+
+
+
+
+
+
+===================================================
+	
+	 2023-06-05 19:36:10.666:  Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is kr.so.java.configuration.exception.BaseException] with root cause
+ Failure in @ExceptionHandler kr.so.java.configuration.web.bind.annotation.BaseControllerAdvice#handleBaseException(BaseException, WebRequest)
+	
+	
+	
+	===================================================
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v2.3.4.RELEASE)[0;39m
+
+[INFO ] 2023-06-06 08:57:15 [restartedMain] [ExampleSpringApplication:55] - Starting ExampleSpringApplication on DESKTOP-BSKEU0A with PID 21076 (C:\DEV\eclipse-workspace\example-spring\target\classes started by MSH in C:\DEV\eclipse-workspace\example-spring)
+[DEBUG] 2023-06-06 08:57:15 [restartedMain] [ExampleSpringApplication:56] - Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+[INFO ] 2023-06-06 08:57:15 [restartedMain] [ExampleSpringApplication:651] - No active profile set, falling back to default profiles: default
+[DEBUG] 2023-06-06 08:57:17 [restartedMain] [Validator:24] - ERROR [ModelSpecification.spec] At least one type of specification is required
+[DEBUG] 2023-06-06 08:57:17 [restartedMain] [Validator:24] - ERROR [ModelSpecification.spec] At least one type of specification is required
+[DEBUG] 2023-06-06 08:57:17 [restartedMain] [Validator:24] - ERROR [ModelSpecification.spec] At least one type of specification is required
+[DEBUG] 2023-06-06 08:57:17 [restartedMain] [Validator:24] - ERROR [ModelSpecification.spec] At least one type of specification is required
+[DEBUG] 2023-06-06 08:57:17 [restartedMain] [Validator:24] - ERROR [ModelSpecification.spec] At least one type of specification is required
+[INFO ] 2023-06-06 08:57:17 [restartedMain] [ExampleSpringApplication:61] - Started ExampleSpringApplication in 1.668 seconds (JVM running for 273.487)
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-1] [BaseHandlerInterceptor:17] - preHandle requestURI : /swagger-resources/configuration/ui
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-1] [BaseHandlerInterceptor:25] - postHandle requestURI : /swagger-resources/configuration/ui
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-2] [BaseHandlerInterceptor:17] - preHandle requestURI : /swagger-resources/configuration/security
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-2] [BaseHandlerInterceptor:25] - postHandle requestURI : /swagger-resources/configuration/security
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-3] [BaseHandlerInterceptor:17] - preHandle requestURI : /swagger-resources
+[INFO ] 2023-06-06 08:59:07 [http-nio-8080-exec-3] [BaseHandlerInterceptor:25] - postHandle requestURI : /swagger-resources
+[INFO ] 2023-06-06 08:59:08 [http-nio-8080-exec-4] [BaseHandlerInterceptor:17] - preHandle requestURI : /v2/api-docs
+[INFO ] 2023-06-06 08:59:08 [http-nio-8080-exec-4] [BaseHandlerInterceptor:25] - postHandle requestURI : /v2/api-docs
+[INFO ] 2023-06-06 08:59:16 [http-nio-8080-exec-5] [BaseHandlerInterceptor:17] - preHandle requestURI : /board
+[DEBUG] 2023-06-06 08:59:16 [http-nio-8080-exec-5] [getList:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B ORDER BY B.REG_DATE DESC
+[DEBUG] 2023-06-06 08:59:16 [http-nio-8080-exec-5] [getList:135] - ==> Parameters: 
+[DEBUG] 2023-06-06 08:59:16 [http-nio-8080-exec-5] [getList:135] - <==      Total: 3
+[INFO ] 2023-06-06 08:59:16 [http-nio-8080-exec-5] [BaseHandlerInterceptor:25] - postHandle requestURI : /board
+[INFO ] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [BaseHandlerInterceptor:17] - preHandle requestURI : /board
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [get:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B WHERE B.BOARD_SEQ = ?
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [get:135] - ==> Parameters: 1(Integer)
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [get:135] - <==      Total: 0
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [save:135] - ==>  Preparing: INSERT INTO T_BOARD ( TITLE, CONTENTS, REG_DATE ) VALUES ( ?, ?, Now() )
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [save:135] - ==> Parameters: Spring(String), Spring 글(String)
+[DEBUG] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [save:135] - <==    Updates: 1
+[INFO ] 2023-06-06 08:59:37 [http-nio-8080-exec-6] [BaseHandlerInterceptor:25] - postHandle requestURI : /board
+[INFO ] 2023-06-06 08:59:46 [http-nio-8080-exec-7] [BaseHandlerInterceptor:17] - preHandle requestURI : /board
+[DEBUG] 2023-06-06 08:59:46 [http-nio-8080-exec-7] [getList:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B ORDER BY B.REG_DATE DESC
+[DEBUG] 2023-06-06 08:59:46 [http-nio-8080-exec-7] [getList:135] - ==> Parameters: 
+[DEBUG] 2023-06-06 08:59:46 [http-nio-8080-exec-7] [getList:135] - <==      Total: 4
+[INFO ] 2023-06-06 08:59:46 [http-nio-8080-exec-7] [BaseHandlerInterceptor:25] - postHandle requestURI : /board
+[INFO ] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [BaseHandlerInterceptor:17] - preHandle requestURI : /board/33
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B WHERE B.BOARD_SEQ = ?
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - ==> Parameters: 33(Integer)
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - <==      Total: 1
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B WHERE B.BOARD_SEQ = ?
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - ==> Parameters: 33(Integer)
+[DEBUG] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [get:135] - <==      Total: 1
+[INFO ] 2023-06-06 09:00:06 [http-nio-8080-exec-8] [BaseHandlerInterceptor:25] - postHandle requestURI : /board/33
+[INFO ] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [BaseHandlerInterceptor:17] - preHandle requestURI : /board/33
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [get:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B WHERE B.BOARD_SEQ = ?
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [get:135] - ==> Parameters: 33(Integer)
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [get:135] - <==      Total: 1
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [delete:135] - ==>  Preparing: DELETE FROM T_BOARD WHERE BOARD_SEQ = ?
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [delete:135] - ==> Parameters: 33(Integer)
+[DEBUG] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [delete:135] - <==    Updates: 1
+[INFO ] 2023-06-06 09:00:18 [http-nio-8080-exec-10] [BaseHandlerInterceptor:25] - postHandle requestURI : /board/33
+[INFO ] 2023-06-06 09:00:52 [http-nio-8080-exec-1] [BaseHandlerInterceptor:17] - preHandle requestURI : /board
+[DEBUG] 2023-06-06 09:00:52 [http-nio-8080-exec-1] [getList:135] - ==>  Preparing: SELECT B.BOARD_SEQ, B.TITLE, B.CONTENTS, B.REG_DATE, FROM T_BOARD B ORDER BY B.REG_DATE DESC
+[DEBUG] 2023-06-06 09:00:52 [http-nio-8080-exec-1] [getList:135] - ==> Parameters: 
+[DEBUG] 2023-06-06 09:00:52 [http-nio-8080-exec-1] [getList:135] - <==      Total: 3
+[INFO ] 2023-06-06 09:00:52 [http-nio-8080-exec-1] [BaseHandlerInterceptor:25] - postHandle requestURI : /board
+
+
+
+
+
+
+
+
+
+===================================================
+	
+
+[ERROR] 2023-06-06 09:43:01 [restartedMain] [HikariPool:593] - HikariPool-1 - Exception during pool initialization.
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: Connection is broken: "java.net.SocketException: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다: localhost" [90067-202]	
+	
+
+Caused by: java.net.SocketException: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다	
+	
+	
+[DEBUG] 2023-06-06 09:46:35 [http-nio-8080-exec-6] [saveList:135] - <==    Updates: 10000
+[INFO ] 2023-06-06 09:46:35 [http-nio-8080-exec-6] [BoardController:128] - 실행시간 : 1.061
+[INFO ] 2023-06-06 09:46:35 [http-nio-8080-exec-6] [BaseHandlerInterceptor:25] - postHandle requestURI : /board/saveList2
+	
+
+[INFO ] 2023-06-06 09:47:15 [http-nio-8080-exec-7] [BoardController:105] - 실행시간 : 9.768
+[INFO ] 2023-06-06 09:47:15 [http-nio-8080-exec-7] [BaseHandlerInterceptor:25] - postHandle requestURI : /board/saveList1	
+	
+===============================================	
+	
+ALTER TABLE T_BOARD
+ALTER COLUMN BOARD_SEQ INT AUTO_INCREMENT,
+ALTER COLUMN BOARD_SEQ SET NOT NULL,
+ALTER COLUMN BOARD_SEQ COMMENT '게시물 번호',
+ADD COLUMN BOARD_TYPE CHAR(5) NOT NULL COMMENT '게시판 종류' AFTER BOARD_SEQ;
+	
+ 
+===================================================
+	
+	
+	ALTER TABLE T_BOARD ALTER COLUMN BOARD_SEQ DROP IDENTITY
+	
+	
+	UPDATE T_BOARD SET BOARD_SEQ = (SELECT COUNT(*) FROM T_BOARD WHERE BOARD_SEQ < t.BOARD_SEQ) + 1
+	ALTER TABLE T_BOARD ALTER COLUMN BOARD_SEQ SET IDENTITY
+	
+	
+	
+	
+	
+	===================================================
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	===================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ 
+===================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+===================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ 
+===================================================

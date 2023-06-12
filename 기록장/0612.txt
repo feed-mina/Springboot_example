@@ -4,10 +4,13 @@
 
 <mapper namespace="kr.so.java.mvc.repository.BoardRepository">
 
-	<resultMap type="kr.so.java.mvc.domain.Board" id="getListResultMap">
-		<result column="DEL_YN" property="delYn" typeHandler="kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler"/>
+	<resultMap type="kr.so.java.mvc.domain.Board"
+		id="getListResultMap">
+		<result column="DEL_YN" property="delYn"
+			typeHandler="kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler" />
 	</resultMap>
-	<select id="getList" parameterType="kr.so.java.framework.data.domain.PageRequestParameter"
+	<select id="getList"
+		parameterType="kr.so.java.framework.data.domain.PageRequestParameter"
 		resultMap="getListResultMap">
 		SELECT
 		B.BOARD_SEQ,
@@ -16,30 +19,44 @@
 		B.REG_DATE,
 		B.DEL_YN
 		FROM T_BOARD B
-		
-		<!-- 검색 -->
+		<include refid="getListQuery" />
+		ORDER BY B.REG_DATE DESC
+		LIMIT #{pageRequest.limit},
+		#{pageRequest.offset}
+	</select>
+
+	<select id="getCount"
+		parameterType="kr.so.java.framework.data.domain.PageRequestParameter">
+		SELECT COUNT(1)
+		FROM T_BOARD B
+		<include refid="getListQuery" />
+	</select>
+
+	<sql id="getListQuery">
 		<where>
-		<!-- 키워드 검색 -->
-		
-			<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parameter.keyword)">
+			<!-- 키워드 검색 -->
+
+			<if
+				test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parameter.keyword)">
 				AND B.TITLE LIKE CONCAT('%', #{parameter.keyword},'%')
 			</if>
-		<!-- 게시물 종류 -->
-			<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parameter.boardTypes)">
+			<!-- 게시물 종류 -->
+			<if
+				test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parameter.boardType)">
 				AND B.BOARD_TYPE = #{parameter.boardTypes}
 			</if>
 			<!-- 게시판 종류 배열 검색 -->
-			<if test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(parameter.boardTypes)">
+			<if
+				test="@org.apache.commons.lang3.ObjectUtils@isNotEmpty(parameter.boardTypes)">
 				AND B.BOARD_TYPE IN(
-				<foreach collection="parameter.boardTypes" item="value" separator=",">
+				<foreach collection="parameter.boardTypes" item="value"
+					separator=",">
 					#{value}
 				</foreach>
 				)
-			</if> 
+			</if>
 		</where>
-		ORDER BY B.REG_DATE DESC
-		LIMIT #{pageRequest.limit}, #{pageRequest.offset} 
-	</select>
+	</sql>
 
 	<select id="get" parameterType="int"
 		resultType="kr.so.java.mvc.domain.Board">
@@ -48,7 +65,8 @@
 		B.TITLE,
 		B.CONTENTS,
 		B.REG_DATE,
-		FROM T_BOARD B
+		FROM
+		T_BOARD B
 		WHERE B.BOARD_SEQ = #{boardSeq}
 	</select>
 
@@ -65,11 +83,12 @@
 		)
 		VALUES
 		(
-		#{boardType.code}, 
+		#{boardType.code},
 		#{title},
 		#{contents},
 		Now(),
-		#{delYn, typeHandler=kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler}
+		#{delYn,
+		typeHandler=kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler}
 		)
 	</insert>
 
@@ -94,10 +113,11 @@
 	<update id="update" parameterType="kr.so.java.mvc.domain.Board">
 		UPDATE T_BOARD
 		SET
-			BOARD_TYPE = #{boardType.code},
+		BOARD_TYPE = #{boardType.code},
 		TITLE = #{title},
 		CONTENTS = #{contents}
-		WHERE BOARD_SEQ = #{boardSeq}
+		WHERE
+		BOARD_SEQ = #{boardSeq}
 	</update>
 
 	<delete id="delete" parameterType="int">
