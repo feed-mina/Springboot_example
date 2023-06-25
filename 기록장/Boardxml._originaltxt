@@ -16,14 +16,10 @@
 		B.REG_DATE,
 		B.DEL_YN
 		FROM T_BOARD B
-		ORDER BY B.REG_DATE DESC
-		<include refid="getListQuery"/>
-	</select>
-
-<!-- 검색 -->
-		<sql id="getListQuery"> 
+		<!-- 검색 -->
 		<where>
-		<!-- 키워드 검색 --> 
+		<!-- 키워드 검색 -->
+		
 			<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(parameter.keyword)">
 				AND B.TITLE LIKE CONCAT('%', #{parameter.keyword},'%')
 			</if>
@@ -40,8 +36,10 @@
 				)
 			</if> 
 		</where>
-	</sql>
-	 
+		ORDER BY B.REG_DATE DESC
+		LIMIT #{pageRequest.limit}, #{pageRequest.offset} 
+	</select>
+
 	<select id="get" parameterType="int"
 		resultType="kr.so.java.mvc.domain.Board">
 		SELECT
@@ -108,4 +106,15 @@
 	</delete>
 
 </mapper>
- 
+
+
+
+
+
+
+
+
+
+
+
+

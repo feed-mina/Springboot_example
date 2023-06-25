@@ -36,8 +36,8 @@
 				<li class="nav-item"><a class="nav-link" href="/community"><spring:message
 							code="menu.community" /></a> <a class="nav-link" href="/notice"><spring:message
 							code="menu.notice" /></a> <a class="nav-link" href="/faq"><spring:message
-							code="menu.faq" /></a> <a class="nav-link" href="/inquary"><spring:message
-							code="menu.inquary" /></a></li>
+							code="menu.faq" /></a> <a class="nav-link" href="/inquiry"><spring:message
+							code="menu.inquiry" /></a></li>
 
 				<li class="nav-item"><a class="nav-link disabled" href="#"
 					tabindex="-1" aria-disabled="true">Disabled</a></li>

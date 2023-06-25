@@ -1,0 +1,79 @@
+0624
+
+http://localhost:8080/community
+Sitemash
+
+
+CREATE TABLE T_MEMBER (
+ MEMBER_ID VARCHAR(15) ,
+ MEMBER_TYPE CHAR(1),
+ PASSWORD VARCHAR(60),
+ NAME VARCHAR(30),
+COMPANY_NAME VARCHAR(50),
+DEPART_NAME VARCHAR(50),
+EMAIL VARCHAR(50),
+TEL_NUMBER(50),
+PHONE_NUMBER(11),
+ZIPCODE INT,
+ADDRESS INT,
+ADDRESS_DETAIL INT,
+AGREE_SNS BIT(1),
+AGREE_EMAIL BIT(1),
+MEMBER_STATE BIT(1),
+LOGIN_DATE BIT(1),
+DEL_DATE BIT(1)
+);
+
+CREATE TABLE T_MEMBER (
+  MEMBER_ID VARCHAR(15),
+  MEMBER_TYPE CHAR(1),
+  PASSWORD VARCHAR(60),
+  NAME VARCHAR(30),
+  COMPANY_NAME VARCHAR(50),
+  DEPART_NAME VARCHAR(50),
+  EMAIL VARCHAR(50),
+  TEL_NUMBER VARCHAR(50),
+  PHONE_NUMBER VARCHAR(11),
+  ZIPCODE INT,
+  ADDRESS INT,
+  ADDRESS_DETAIL INT,
+  AGREE_TERNS CHAR(1),
+  AGREE_SERVICE CHAR(1),
+  AGREE_SNS CHAR(1),
+  AGREE_EMAIL CHAR(1),
+  MEMBER_STATE CHAR(1),
+  LOGIN_DATE DATETIME,
+  DEL_DATE DATETIME,
+  JOIN_DATE DATETIME,
+  UPDATE_DATE DATETIME,
+   PRIMARY KEY (MEMBER_ID)
+);
+주요 변경 사항:
+
+TEL_NUMBER과 PHONE_NUMBER의 데이터 타입을 VARCHAR로 변경했습니다.
+ADDRESS, ADDRESS_DETAIL, AGREE_SNS, AGREE_EMAIL, MEMBER_STATE, LOGIN_DATE, DEL_DATE의 데이터 타입을 각각 올바른 데이터 타입으로 수정했습니다. ADDRESS와 ADDRESS_DETAIL은 VARCHAR로 변경되었으며, AGREE_SNS, AGREE_EMAIL, MEMBER_STATE는 BOOLEAN으로 변경되었습니다. LOGIN_DATE와 DEL_DATE는 날짜를 나타내므로 DATE로 변경되었습니다.
+이제 수정된 SQL 문을 실행하면 테이블이 성공적으로 생성될 것입니다.
+
+
+
+User
+
+[INFO ] 2023-06-24 11:10:29 [http-nio-8080-exec-5] [BaseHandlerInterceptor:26] - handler Method : kr.so.java.mvc.controller.MemberController#findById(String)
+[ERROR] 2023-06-24 11:10:29 [http-nio-8080-exec-5] [[dispatcherServlet]:175] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): kr.so.java.mvc.repository.MemberRepository.findById] with root cause
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): kr.so.java.mvc.repository.MemberRepository.findById  오류해결방법을 자세하고 쉽게 알려줘
+ChatGPT
+주어진 오류 메시지를 보면 kr.so.java.mvc.repository.MemberRepository.findById에 대한 유효하지 않은 바운드 스테이트먼트(Bound Statement) 오류가 발생한 것 같습니다. 이 오류는 MyBatis에서 SQL 매핑 구성이 잘못되었거나 해당 쿼리가 매핑 파일에 정의되지 않았을 경우 발생할 수 있습니다.
+
+해결 방법을 찾기 위해 다음 단계를 따를 수 있습니다:
+
+kr.so.java.mvc.repository.MemberRepository 클래스의 findById 메서드를 확인하고, 해당 메서드에서 사용되는 MyBatis 매핑 구성을 검토합니다. findById 메서드는 어떤 SQL 쿼리를 실행하도록 정의되어 있는지 확인합니다.
+
+매핑 파일(Mapper.xml)을 열어서 kr.so.java.mvc.repository.MemberRepository.findById에 해당하는 쿼리가 정의되어 있는지 확인합니다. 쿼리가 정의되어 있지 않다면, 해당 매핑 파일에 findById에 대한 적절한 쿼리를 추가해야 합니다.
+
+매핑 파일에서 쿼리가 정의되어 있다면, 쿼리의 ID가 findById 메서드의 이름과 정확히 일치하는지 확인합니다. 일치하지 않으면 메서드 이름과 매핑 파일의 쿼리 ID를 일치시켜야 합니다.
+
+MyBatis 설정 파일(mybatis-config.xml 또는 spring-mybatis.xml 등)을 확인하여 매핑 파일이 제대로 등록되어 있는지 확인합니다. 설정 파일에 <mapper> 요소를 사용하여 매핑 파일을 등록해야 합니다.
+
+위의 단계를 따라서 쿼리 매핑이 올바르게 설정되어 있는지 확인하고, 필요한 경우 매핑 파일을 수정하여 kr.so.java.mvc.repository.MemberRepository.findById에 대한 바운드 스테이트먼트 오류를 해결할 수 있습니다.
+
+

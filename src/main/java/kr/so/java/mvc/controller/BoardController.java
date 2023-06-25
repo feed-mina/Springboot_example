@@ -29,6 +29,7 @@ import kr.so.java.framework.data.domain.PageRequest;
 import kr.so.java.framework.data.domain.PageRequestParameter;
 import kr.so.java.framework.data.web.RequestConfig;
 import kr.so.java.mvc.domain.Board;
+import kr.so.java.mvc.domain.BoardType;
 import kr.so.java.mvc.domain.MenuType;
 import kr.so.java.mvc.parameter.BoardParameter;
 import kr.so.java.mvc.parameter.BoardSearchParameter;
@@ -73,15 +74,13 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 	}
 
-	// 상세페이지
-
-
+	// 상세페이지 
 	@GetMapping("/{menuType}")
-	public String list(@PathVariable MenuType menuType, BoardSearchParameter parameter, PageRequest pageRequest, Model model) {
+	public String list(@PathVariable MenuType menuType, BoardSearchParameter parameter, PageRequest pageRequest, Model model, BoardType[] boardTypes) {
 		logger.info("menuType:{}", menuType);
 		logger.info("pageRequest : {}", pageRequest);
 		
-		parameter.setBoardType(menuType.boardType());
+		 parameter.setBoardType(menuType.boardType()); 
 		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(
 				pageRequest, parameter);
 
@@ -112,10 +111,7 @@ public class BoardController {
 		model.addAttribute("menuType", menuType);
 		return "/board/form";
 
-	}
-
-
-	
+	} 
 	// 수정화면
 	
 	@GetMapping("/{menuType}/edit/{boardSeq}")
@@ -132,9 +128,7 @@ public class BoardController {
 		model.addAttribute("menuType", menuType);
 		return "/board/form";
 	}
-
-
-	
+ 
 
 	// 등록 화면
 	@PostMapping("/{menuType}/save")

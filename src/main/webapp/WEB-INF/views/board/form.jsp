@@ -8,18 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>SampleBoard_2306</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
 
 	<div class="container">
 		<form id="form" method="post" action="/save">
-			<input type="hidden" name="boardSeq"
-				value="${board == null? 0 : board.boardSeq }" />
+			<input type="hidden" name="boardType" value="COMMUNITY" />
 			<div class="row mb-3">
 				<label for="title" class="col-sm-2 col-form-label"><spring:message
 						code="board.title" /></label>
@@ -33,7 +29,7 @@
 				<label for="contents" class="col-sm-2 col-form-label"><spring:message
 						code="board.contents" /></label>
 				<div class="col-sm-10">
-					<textarea class="form-control" name="contents" id="contents"
+					<textarea class="form-control"  name="contents" id="contents"
 						placeholder="<spring:message code="placeholder.required" />">${board.contents}</textarea>
 				</div>
 			</div>
@@ -44,24 +40,23 @@
 		</form>
 
 	</div>
-	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 	<script>
 		$(function() {
 			var $form = $('#form');
 			$form.bind('submit', function() {
 				$.ajax({
-					url : '/${menuType}/save',
+					url : '/notice/save',
+					//url : '/board/save',
 					type : 'post',
-					data : $form.serialize(),
+					data : $form.serialize(), 
 					dataType : 'json',
 					success : function(response) {
-						console.log(response);
-						if (response.code == 'SUCCESS') {
+						if(response.code == 'SUCCESS'){
 							alert('저장되었습니다.');
-							location.href = '/${menuType}/' + response.data;
-						} else {
+							location.href='/notice/' + response.data ;
+						}else{
 							alert(data.message);
-						}
+						} 
 					}
 				});
 				return false;

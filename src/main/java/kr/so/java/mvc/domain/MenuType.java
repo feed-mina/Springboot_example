@@ -5,7 +5,7 @@ public enum MenuType {
 	community(BoardType.COMMUNITY, "menu.community", "/community"),
 	notice(BoardType.NOTICE, "menu.notice", "/notice"),
 	faq(BoardType.FAQ, "menu.faq", "/faq"),
-	inquary(BoardType.INQUARY, "menu.inquiry", "/inquiry"),
+	inquiry(BoardType.INQUIRY, "menu.inquiry", "/inquiry"),
 	;
 	
 	private String code;

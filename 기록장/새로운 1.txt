@@ -1,0 +1,165 @@
+작업환경 세팅
+
+docker 설치
+brew install docker 
+brew link docker
+docker version
+
+
+mysql 설치 및 실행
+docker pull mysql
+docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 --name mysql mysql 
+docker ps
+
+docker: no matching manifest for linux/arm64/v8 in the manifest list entries. 오류가 발생하시는분은
+docker pull --platform linux/x86_64 mysql
+
+my sql 데이터베이스 생성
+docker exec -it mysql bash
+mysql -u root -p
+create database stock_example;
+use stock_example;
+
+  Windows PowerShell
+새로운 크로스 플랫폼 PowerShell 사용 https://aka.ms/pscore6 
+
+PS C:\Users\MSH> docker version
+Client:
+ Cloud integration: v1.0.28
+ Version:           20.10.17
+ API version:       1.41
+ Go version:        go1.17.11
+ Git commit:        100c701
+ Built:             Mon Jun  6 23:09:02 2022
+ OS/Arch:           windows/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Desktop 4.11.1 (84025)
+ Engine:
+  Version:          20.10.17
+  API version:      1.41 (minimum version 1.12)
+  Git commit:       a89b842
+  Built:            Mon Jun  6 23:01:23 2022
+  Experimental:     false
+ containerd:
+  Version:          1.6.6
+  GitCommit:        10c12954828e7c7c9b6e0ea9b0c02b01407d3ae1
+ runc:
+  Version:          1.1.2
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+PS C:\Users\MSH> docker run --name repo alpine/git clone htt
+ps://github.com/docker/getting-started.git
+Unable to find image 'alpine/git:latest' locally
+latest: Pulling from alpine/git
+31e352740f53: Pull complete
+529605c08729: Pull complete
+6b95f022467a: Pull complete
+Digest: sha256:4dfdb8ef5aa4a3541e473265029159bb7ef77df80e883
+7d562344f4aa76ccd64
+Status: Downloaded newer image for alpine/git:latest        
+Cloning into 'getting-started'...
+PS C:\Users\MSH> docker cp repo:/git/getting-started/ .     
+PS C:\Users\MSH> docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+46ef68baacb7: Pull complete
+94c1114b2e9c: Pull complete
+ff05e3f38802: Pull complete
+41cc3fcd9912: Pull complete
+07bbc8bdf52a: Pull complete
+6d88f83726a9: Pull complete
+cf5c7d5d33f7: Pull complete
+9db3175a2a66: Pull complete
+feaedeb27fa9: Pull complete
+cf91e7784414: Pull complete
+b1770db1c329: Pull complete
+Digest: sha256:15f069202c46cf861ce429423ae3f8dfa6423306fbf39
+9eaef36094ce30dd75c
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+PS C:\Users\MSH> docker run -d -p 3306:3306 -e MYSQL_ROOT_PA
+SSWORD=1234 --name mysql mysql
+6e06902607f9c96aabb3e03e1b3053551b9fd69ed91fa075b21a8e804a4f
+1f48
+PS C:\Users\MSH> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED   
+       STATUS          PORTS                               N
+AMES
+6e06902607f9   mysql     "docker-entrypoint.s…"   44 seconds
+ ago   Up 40 seconds   0.0.0.0:3306->3306/tcp, 33060/tcp   m
+ysql
+PS C:\Users\MSH> docker exec -it mysql bash
+bash-4.4#
+bash-4.4# mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost
+' (using password: YES)
+bash-4.4# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.     
+
+Oracle is a registered trademark of Oracle Corporation and/o
+r its
+affiliates. Other names may be trademarks of their respectiv
+e
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the curren
+t input statement.
+
+mysql> create database stock_example;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use stock_example;
+Database changed
+mysql>
+
+
+
+
+프로젝트 세팅
+
+IntelliJ 가 아니신분들은 아래에서 프로젝트를 Export 하실 수 있습니다.
+
+https://start.spring.io/ 
+의존성선택
+Generate
+Project Open
+
+
+
+
+
+application.yml
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/stock_example
+    username: root
+    password: 1234
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+
+
+

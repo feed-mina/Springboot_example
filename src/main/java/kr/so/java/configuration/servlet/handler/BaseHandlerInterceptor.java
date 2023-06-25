@@ -28,6 +28,8 @@ public class BaseHandlerInterceptor extends HandlerInterceptorAdapter {
 	  		  		handlerMethod.getMethodAnnotation(RequestConfig.class);
 	  		if (requestConfig != null) {
 	  			if (requestConfig.loginCheck()) {
+	  				
+	  				// 로그인 체크가 필수인 경우
 	  				throw new BaseException(BaseResponseCode.LOGIN_REQUIRED, new String[] {request.getRequestURI()});
 	  			}
 	  		}
