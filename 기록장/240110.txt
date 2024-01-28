@@ -1,0 +1,139 @@
+sql_selectCnslt
+
+	<sql id="sql_selectCnslt">  
+		 select 
+			c.cnslt_seq /* 순번 */
+			,c.cnslt_nm
+			,c.profsr_user_seq /*교수 순번*/
+			,fn_usernm(c.profsr_user_seq) as user_nm /*교수명 */
+			,c.cnslt_knd_code /*상담 형태 */
+			,c.cnslt_place_nm /* 상담장소 */
+			,c.cnslt_co /*상담생수*/
+			,fx.cancl_ntcn_array 
+			,DATE_FORMAT(c.cnslt_begin_de, '%Y-%m-%d') AS cnslt_begin_date 	/*상담 시작하는 기간 */
+			,DATE_FORMAT(c.cnslt_end_de, '%Y-%m-%d') AS cnslt_end_date 	/*상담 끝나는기간*/
+			,c.cnslt_week_array 
+			,LEFT(fx.cnslt_begin_time,2) AS cnslt_begin_time_hour /* 시작시간 */
+			,RIGHT(fx.cnslt_begin_time, 2) AS cnslt_begin_time_minutes /* 종료시간 */
+			,LEFT(fx.cnslt_end_time, 2) AS cnslt_end_time_hour
+			,RIGHT(fx.cnslt_end_time, 2) AS cnslt_end_time_minutes
+			,fx.cnslt_begin_time
+			,fx.cnslt_end_time
+			,c.rcrit_begin_dt /* 모집기간 */
+			,c.rcrit_end_dt /* 모집기간 */
+			,fx.use_at /* 신청중 /신청미정 */
+			,fx.cnslt_sn 
+			, (SELECT COUNT(DISTINCT tcr.cnslt_seq, tcr.cnslt_sn , tcr.cnslt_user_seq)  
+			FROM tb_cnslt_fx fx , tb_cnslt_reqst tcr,  tb_cnslt c
+			WHERE c.cnslt_seq = fx.cnslt_seq AND tcr.cnslt_sttus_se = 'R') AS cnslt_user_cnt /* 상담 신청자 */
+			, (SELECT COUNT(cnslt_seq) 
+            FROM tb_cnslt_reqst tcr
+            WHERE  tcr.cnslt_seq = #{cnsltSeq} 
+			AND tcr.cnslt_sn = fx.cnslt_sn   
+			AND tcr.cnslt_sttus_se = 'R' OR tcr.cnslt_sttus_se = 'A' OR tcr.cnslt_sttus_se = 'N' ) AS cnslt_registcr_cnt /* 상담 신청자 */
+			,(SELECT COUNT(cnslt_seq)  
+            FROM tb_cnslt_reqst tcr
+            WHERE  tcr.cnslt_seq = #{cnsltSeq} 
+			AND tcr.cnslt_sn = fx.cnslt_sn   
+			AND tcr.cnslt_sttus_se = 'A' ) AS cnslt_participants_cnt /* 상담 참석자 */  
+			,COUNT(fx.cnslt_seq) AS cnslt_seq_cnt
+			,CASE WHEN NOW() BETWEEN c.rcrit_begin_dt AND c.rcrit_end_dt THEN '신청중'
+				WHEN c.rcrit_begin_dt <![CDATA[>=]]> NOW() THEN '시작 예정'
+				WHEN c.rcrit_end_dt  <![CDATA[<]]> 	NOW() THEN '신청 마감'
+			END AS cnslt_status
+			,CASE WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_2' THEN '그룹상담'
+				WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_1' THEN '개인상담'
+			END AS cnslt_se_str
+			 
+		from tb_cnslt c LEFT JOIN tb_cnslt_fx fx ON fx.cnslt_seq = c.cnslt_seq
+		LEFT JOIN tb_user u ON u.user_seq = c.profsr_user_seq   
+        WHERE 1=1
+		<if test='@com.sch.util.CommonUtil@isNotEmpty(searchText)'>
+		AND   fn_usernm(c.profsr_user_seq)  LIKE concat('%', #{searchText} , '%') <!-- 교수명 -->
+		OR (
+			CASE
+			 WHEN NOW() BETWEEN c.rcrit_begin_dt AND c.rcrit_end_dt THEN '신청중'
+				WHEN c.rcrit_begin_dt <![CDATA[>=]]> NOW() THEN '시작 예정'
+				WHEN c.rcrit_end_dt  <![CDATA[<]]> 	NOW() THEN '신청 마감'
+			END
+		) LIKE concat('%', #{searchText} , '%') <!-- 신청 기간 -->
+		OR (
+			CASE 
+				WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_2' THEN '그룹상담'
+				WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_1' THEN '개인상담'
+			END
+		) LIKE concat('%', #{searchText} , '%') <!--상담형태 -->
+		</if>
+		GROUP BY cnslt_seq
+		ORDER BY c.cnslt_begin_de DESC
+	</sql>
+
+    sql_cnsltOperateList
+
+    
+	<sql id="sql_cnsltOperateList">
+		select 
+			c.cnslt_seq /* 순번 */
+			,fx.cnslt_sn 
+			,fx.cancl_ntcn_array 
+			,DATE_FORMAT(fx.cnslt_dt,'%Y-%m-%d') AS cnslt_date 
+			,c.profsr_user_seq /*교수 순번*/
+			,fn_usernm(c.profsr_user_seq) as user_nm  /*교수명 */
+			,c.cnslt_knd_code /*상담 형태 */
+			,c.cnslt_place_nm /* 상담장소 */
+			,c.cnslt_co /*상담생수*/
+			,DATE_FORMAT(c.cnslt_begin_de, '%Y-%m-%d') AS cnslt_begin_date 	/*상담 시작하는 기간 */
+			,DATE_FORMAT(c.cnslt_end_de, '%Y-%m-%d') AS cnslt_end_date 	/*상담 끝나는기간*/
+			,c.cnslt_week_array 
+			,LEFT(fx.cnslt_begin_time,2) AS cnslt_begin_time_hour /* 시작시간 */
+			,RIGHT(fx.cnslt_begin_time, 2) AS cnslt_begin_time_minutes /* 종료시간 */
+			,LEFT(fx.cnslt_end_time, 2) AS cnslt_end_time_hour
+			,RIGHT(fx.cnslt_end_time, 2) AS cnslt_end_time_minutes
+			,c.rcrit_begin_dt /* 모집기간 */
+		,(SELECT COUNT(tcr.cnslt_seq)
+        FROM tb_cnslt_reqst tcr 
+        WHERE tcr.cnslt_seq = fx.cnslt_seq AND  tcr.cnslt_sn = fx.cnslt_sn
+       AND (tcr.cnslt_sttus_se = 'R' OR tcr.cnslt_sttus_se = 'A' )) AS consult_user_count /* 현신청자 */
+		,(SELECT COUNT(tcr.cnslt_seq)
+        FROM tb_cnslt_reqst tcr 
+        WHERE tcr.cnslt_seq = fx.cnslt_seq AND  tcr.cnslt_sn = fx.cnslt_sn
+        AND tcr.cnslt_sttus_se  = 'R'    ) AS cnslt_registcr_cnt /* 현신청자 */
+		,(SELECT COUNT(tcr.cnslt_seq)
+		        FROM tb_cnslt_reqst tcr 
+		        WHERE tcr.cnslt_seq = fx.cnslt_seq AND tcr.cnslt_sn = fx.cnslt_sn
+		        AND tcr.cnslt_sttus_se = 'A'  ) AS consult_user_cnt /* 현신청자 */
+			,c.rcrit_end_dt /* 모집기간 */
+			,fx.use_at /* 신청중 /신청미정 */
+		,CASE  DAYOFWEEK(fx.cnslt_dt ) 		
+		WHEN '1' THEN '일요일'
+		WHEN '2' THEN '월요일'
+		WHEN '3' THEN '화요일'
+		WHEN '4' THEN '수요일'
+		WHEN '5' THEN '목요일'
+		WHEN '6' THEN '금요일'
+		WHEN '7' THEN '토요일'
+		END AS cnslt_day   
+			,CASE WHEN NOW() BETWEEN c.rcrit_begin_dt AND c.rcrit_end_dt THEN '신청중'
+				WHEN c.rcrit_begin_dt<![CDATA[>=]]> NOW() THEN '신청 예정'
+				WHEN c.rcrit_end_dt  <![CDATA[<]]> NOW() THEN '신청 마감'
+			END AS cnslt_status
+			,CASE WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_2' THEN '그룹상담'
+				WHEN c.cnslt_knd_code = 'CNSLT_KND_CODE_1' THEN '개인상담'
+			END AS cnslt_se_str
+		from tb_cnslt_fx fx LEFT JOIN tb_cnslt c ON fx.cnslt_seq = c.cnslt_seq
+        WHERE 1=1
+		<if test='@com.sch.util.CommonUtil@isNotEmpty(searchText)'>
+		AND fn_usernm(c.profsr_user_seq) LIKE concat('%', #{searchText} , '%') <!-- 교수명 -->
+		</if>
+		<if test='@com.sch.util.CommonUtil@isNotEmpty(profsrUserSeq)'>
+		AND c.profsr_user_seq = #{profsrUserSeq}<!-- 교수명 -->
+		</if>
+		AND (
+			fx.use_at = 'Y'
+			<if test='canceldCnsltInclude'>
+			OR fx.use_at = 'N'
+			</if>
+		)
+		ORDER BY  fx.cnslt_dt DESC, c.cnslt_seq, fx.cnslt_sn ASC 
+	</sql>
+	 

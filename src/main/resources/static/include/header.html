@@ -1,0 +1,117 @@
+<nav class="navbar navbar-expand topbar navbar-light bg-white static-top shadow">
+	<!-- Topbar Navbar -->
+	<ul class="navbar-nav col">
+		<div class="nav col" style="justify-content: space-around">
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="/sch/admin/login/login.html"
+			>
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-building"></i>
+				</div>
+				<div class="d-flex align-items-center justify-content-center">
+	        	<img class="sidebar-card-illustration w-100" src="/image/sch_logo.svg" alt="">
+	    	</div>
+			</a>
+			<li class="nav-item" data-category="dashboard">
+				<a data-auth="authDashboard" class="nav-link" href="/sch/admin/dashBoard/dashBoard.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:dashboard">대시보드</span>
+				</a>
+			 
+			</li>
+			<li class="nav-item" data-category="lctreSemina">
+				<a data-auth="authLctreSemina" class="nav-link" href="/sch/admin/lctreSemina/lctreSemina.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:lctre_semina">강의*세미나</span>
+				</a>
+			</li>
+			<li class="nav-item" data-category="userManage">
+				<a data-auth="authLessonUser" class="nav-link" href="/sch/admin/userManage/userList.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:user">수강생 관리</span>
+				</a>
+			</li>
+			<li class="nav-item" data-category="cnsltExprn">
+				<a data-auth="authCnsltExprn" class="nav-link" href="/sch/admin/cnsltExprn/consultList.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:cnslt_exprn">교수상담 * 체험예약</span>
+				</a>
+			</li>
+			<li class="nav-item" data-category="alarm">
+				<a data-auth="authAlarm" class="nav-link" href="/sch/admin/alarm/alarmList.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:alarm">알림 관리</span>
+				</a>
+			</li>
+      		<li class="nav-item" data-category="board">
+				<a data-auth="authBoard" class="nav-link" href="/sch/admin/board/noticeList.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:board">게시판</span>
+				</a>
+			</li>
+			<li class="nav-item" data-category="sysManage">
+				<a data-auth="authSystem" class="nav-link" href="/sch/admin/sysManage/mberManage.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span data-i18n="gnb:system">시스템 관리</span>
+				</a>
+			</li>
+		</div>
+
+		<div class="topbar-divider d-none d-sm-block"></div>
+
+		<!-- Nav Item - User Information -->
+		<div class="nav-item dropdown no-arrow dp_end">
+			<div class="custom-control custom-switch nav-link ml-3">
+				<input type="checkbox" class="custom-control-input" id="customSwitch1">
+				<label class="custom-control-label" for="customSwitch1">한글</label>
+			</div>
+			<a
+				class="nav-link dropdown-toggle"
+				href="#"
+				id="userDropdown"
+				role="button"
+				data-toggle="dropdown"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small" id="h_admin_nm"></span>
+				<img class="img-profile rounded-circle" src="/image/undraw_profile.svg" />
+			</a>
+			<!-- Dropdown - User Information -->
+			<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+				<a
+					class="dropdown-item"
+					onclick="util.logout()"
+				>
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+					Logout
+				</a>
+				<a
+					class="dropdown-item"
+					href="/sch/admin/login/login.html"
+				>
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+					Login
+				</a>
+			
+			</div>
+		</div>
+	</ul>
+</nav>
+
+<!-- 기존의 search_details함수는 common.js로 이동 -->
+
+<script>
+	$("#customSwitch1").on("click", function(evt){
+		// customSwitch1 id 태그는 한글/중국어 글로벌 기능 버튼
+		var checked = $(evt.currentTarget).prop('checked')
+		var label = $(evt.currentTarget).next("label")
+		label.text(checked ? "한글" : '중국어')
+
+		$.i18n.setLng(checked ? 'ko-KR' : "zh-CH");
+		$('#header-html').i18n() 
+		// 페이지 header <header id="header-html"></header> 부분
+		$('#sidebar-html').i18n()
+	})
+</script>

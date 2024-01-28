@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta name="author" content="">
+    <title>교수상담 개설</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/allVendors.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/sch/js/admin/cnsltExprn/consultDetail.js"></script>
+</head>
+
+<body>
+
+    <!-- ===== header ====== -->
+    <header id="header-html"></header>
+    <!-- ===== /header ====== -->
+    <div id="wrapper">
+        <!-- sidebar -->
+        <aside id="sidebar-html"></aside>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content" class="pt-0">
+                <!-- ===== app ====== -->
+                <div id="app">
+                    <!-- ===== container ====== -->
+                    <div id="container" class="d-flex flex-column">
+                        <div class="container-fluid">
+                            <!-- ===== container-fluid ====== -->
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h1 mb-0 text-gray-800">교수상담 개설 상세</h1>
+                            </div>
+                            <div class="col">
+                                <div class="row mb-4">
+                                    <div class="card shadow col">
+                                        <div class="card-body">
+                                            <div class="row justify-content-center mt25">
+                                                <div class="col">
+                                                    <form class="d-flex justify-content-center col">
+                                                        <div class="col tbl_col_typ1">
+                                                            <table class="tableForm">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <!-- ===== 교수명   ====== -->
+                                                                        <th>교수명</th>
+                                                                        <td>
+                                                                            <div id="profsrUserSeqText">
+                                                                                {{cnsltDetail.userNm}}
+                                                                            </div>
+                                                                        </td>
+                                                                        <th>상담 형태&nbsp;&nbsp;</th>
+                                                                        <td>
+                                                                            <div id="cnsltSe">
+                                                                                {{cnsltDetail.cnsltSeStr}}</div>
+                                                                        </td>
+                                                                    </tr>
+                                                                <tr>
+                                                                    <th>
+                                                                        제목
+                                                                    </th>
+                                                                    <td colspan="3">
+                                                                       {{cnsltDetail.cnsltNm}}
+                                                                    </td>
+                                                                </tr>
+
+                                                                    <!-- ===== / 상담형태 : 드롭박스 ====== -->
+                                                                    <tr>
+                                                                        <th>상담장소 </th>
+                                                                        <td>
+                                                                            <div id="cnsltPlaceNm">
+                                                                                {{cnsltDetail.cnsltPlaceNm}}</div>
+                                                                        </td>
+
+                                                                        <th>상담생수</th>
+                                                                        <td>
+                                                                            <div>
+                                                                                <div id="cnsltCo">
+                                                                                    {{cnsltDetail.cnsltCo}}명
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <!-- ===== 상담기간 ====== -->
+                                                                    <tr>
+                                                                        <th>상담 기간</th>
+                                                                        <td>
+                                                                            <div
+                                                                                class="input-group flex-nowrap bx_calendar">
+                                                                                <div class="side-by-side div-input">
+                                                                                    {{cnsltDetail.cnsltBeginDate}}</div>
+                                                                                <span class="d-block mx-3"
+                                                                                    style="line-height: 38px">~</span>
+                                                                                <div class="side-by-side div-input">
+                                                                                    {{cnsltDetail.cnsltEndDate}}</div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <th>상담요일&nbsp;&nbsp;</th>
+                                                                        <!-- ===== 상담요일 ====== -->
+                                                                        <td>
+                                                                            <div>
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="monday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="1" />
+                                                                                <label for="monday"
+                                                                                    class="form-check-label">월</label>&nbsp;&nbsp;&nbsp;
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="tuesday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="2" />
+                                                                                <label for="tuesday"
+                                                                                    class="form-check-label">화</label>&nbsp;&nbsp;&nbsp;
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="wednesday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="3" />
+                                                                                <label for="wednesday"
+                                                                                    class="form-check-label">수</label>&nbsp;&nbsp;&nbsp;
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="thursday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="4" />
+                                                                                <label for="thursday"
+                                                                                    class="form-check-label">목</label>&nbsp;&nbsp;&nbsp;
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="friday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="5" />
+                                                                                <label for="friday"
+                                                                                    class="form-check-label">금</label>&nbsp;&nbsp;&nbsp;
+                                                                                <input type="checkbox" disabled block
+                                                                                    class="cnsltDayArray"
+                                                                                    name="cnsltDayArray" id="saturday"
+                                                                                    v-model="cnsltDetail.cnsltWeekArray"
+                                                                                    value="6" />
+                                                                                <label for="saturday"
+                                                                                    class="form-check-label">토</label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <!-- ===== 상담시간 ====== -->
+                                                                    <tr>
+                                                                        <th class="col-sm-2">상담시간 </th>
+                                                                        <td colspan="3">
+                                                                            <div class="input-group flex-nowrap"
+                                                                                id="getConsultSnTime"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <!-- ===== 모집기간 ====== -->
+                                                                    <tr>
+                                                                        <th>모집 기간</th>
+                                                                        <td colspan="3">
+                                                                            <div class="input-group flex-nowrap">
+                                                                                <div class="side-by-side div-input">
+                                                                                    {{cnsltDetail.rcritBeginDate}}</div>
+                                                                                <div class="side-by-side div-input-sm">
+                                                                                    {{cnsltDetail.rcritBeginHour}}</div>
+                                                                                :
+                                                                                <div class="side-by-side div-input-sm">
+                                                                                    {{cnsltDetail.rcritBeginMinutes}}
+                                                                                </div>
+                                                                                &nbsp;&nbsp; &nbsp;&nbsp; ~ &nbsp;&nbsp;
+                                                                                &nbsp;&nbsp;
+                                                                                <div class="side-by-side div-input">
+                                                                                    {{cnsltDetail.rcritEndDate}}</div>
+                                                                                <div class="side-by-side div-input-sm">
+                                                                                    {{cnsltDetail.rcritEndHour}}</div> :
+                                                                                <div class="side-by-side div-input-sm">
+                                                                                    {{cnsltDetail.rcritEndMinutes}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </form>
+                                                    
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="pr-5">
+                                                                <a href="/sch/admin/cnsltExprn/consultList.html"
+                                                                    class="btn btn-dark btn-icon btn_search_width">
+                                                                    <span class="text">목록</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="pr-5" id="btnUpdateCnslt">
+                                                               
+                                                            </div>
+                                                            <div class="pr-5" id="btnDeleteCnslt">
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ===== /container-fluid ====== -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== /container ====== -->
+            </div>
+            <!-- ===== /app ====== -->
+        </div>
+    </div>
+</body>
+
+</html>

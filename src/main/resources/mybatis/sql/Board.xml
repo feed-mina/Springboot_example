@@ -2,12 +2,12 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.so.java.mvc.repository.BoardRepository">
+<mapper namespace="kr.so.mvc.repository.BoardRepository">
 
-	<resultMap type="kr.so.java.mvc.domain.Board" id="getListResultMap">
-		<result column="DEL_YN" property="delYn" typeHandler="kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler"/>
+	<resultMap type="kr.so.mvc.domain.Board" id="getListResultMap">
+		<result column="DEL_YN" property="delYn" typeHandler="kr.so.configuration.mybatis.typehandler.StringValueBooleanTypeHandler"/>
 	</resultMap>
-	<select id="getList" parameterType="kr.so.java.framework.data.domain.PageRequestParameter"
+	<select id="getList" parameterType="kr.so.framework.data.domain.PageRequestParameter"
 		resultMap="getListResultMap">
 		SELECT
 		B.BOARD_SEQ,
@@ -43,7 +43,7 @@
 	</sql>
 	 
 	<select id="get" parameterType="int"
-		resultType="kr.so.java.mvc.domain.Board">
+		resultType="kr.so.mvc.domain.Board">
 		SELECT
 		B.BOARD_SEQ,
 		B.TITLE,
@@ -54,7 +54,7 @@
 	</select>
 
 	<insert id="save"
-		parameterType="kr.so.java.mvc.parameter.BoardParameter"
+		parameterType="kr.so.mvc.parameter.BoardParameter"
 		useGeneratedKeys="true" keyProperty="boardSeq">
 		INSERT INTO T_BOARD
 		(
@@ -70,7 +70,7 @@
 		#{title},
 		#{contents},
 		Now(),
-		#{delYn, typeHandler=kr.so.java.configuration.mybatis.typehandler.StringValueBooleanTypeHandler}
+		#{delYn, typeHandler=kr.so.configuration.mybatis.typehandler.StringValueBooleanTypeHandler}
 		)
 	</insert>
 
@@ -92,7 +92,7 @@
 	</insert>
 
 
-	<update id="update" parameterType="kr.so.java.mvc.domain.Board">
+	<update id="update" parameterType="kr.so.mvc.domain.Board">
 		UPDATE T_BOARD
 		SET
 			BOARD_TYPE = #{boardType.code},

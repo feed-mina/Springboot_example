@@ -1,0 +1,278 @@
+
+ 
+div#gongjarueButton {
+	margin-top: 3em;
+	display: flex;
+	justify-content: flex-end; 
+}
+div#gongjaruePicLine1,
+div#gongjaruePicLine2,
+div#gongjaruePicButton2,
+div#gongjaruePicLine3,
+div#gongjaruePicLine4,
+#gongjaruePicLine4 {
+		display: flex;
+		flex-direction: row;
+    justify-content: space-between; 
+} 
+div#gongjaruePicLine1,
+div#gongjaruePicLine3{	
+	background: url('/image/front.png/') no-repeat center; 
+	background-size: cover;
+}
+ 
+div#gongjaruePicLine2,
+div#gongjaruePicLine4
+{	
+	background: url('/image/side.png/') no-repeat center; 
+	background-size: cover;
+}
+div#gongjarueCnButtonLine1,
+div#gongjarueCnButtonLine2,
+div#gongjarueCnButtonLine3,
+div#gongjarueCnButtonLine4{
+	padding-right: 5%;
+	padding-left: 4%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;  
+}
+
+div#gongjaruePicButton1,
+div#gongjaruePicButton2,
+div#gongjaruePicButton3,
+div#gongjaruePicButton4{
+	padding-right: 5%;
+	padding-left: 4%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-top: 2em;
+}
+div#gongjaruePicBorderLine1,
+div#gongjaruePicBorderLine2,
+div#gongjaruePicBorderLine3,
+div#gongjaruePicBorderLine4{
+	margin-top: 5em;
+}
+div#sectionLine2{
+	display: flex;
+	width: 100%;
+}
+div#sectionLine201{  
+	padding-right: 10%;
+	display: flex;
+	width: 50%;
+	justify-content: space-around;
+}
+
+#section1,
+#section6{
+	padding-left: 10%;
+	width: 50%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#section8{
+	padding-left: 10%;
+	width: 50%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#section3{
+	padding-left: 10%;
+	width: 50%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#section4-1{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+#section2,
+#section7,
+#section8-1{
+	width: 50%;
+	display: flex; 
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 10%;
+
+}
+#section5{ 
+	display: flex; 
+	align-items: center; 
+}
+#section9-1{ 
+	display: flex; 
+	align-items: center;
+	justify-content: flex-end;
+}
+#section4{
+	display: flex;
+  flex-direction: column; 
+} 
+#section9{
+	display: flex;
+	width: 50%;
+	padding-left: 5%;
+	padding-right: 10%;
+  flex-direction: column;
+	align-items: flex-start;
+} 
+
+#gongjarueDiv2,
+#gongjarueDiv3,
+#gongjarueDiv7, 
+#gongjarueDiv13,
+#gongjarueDiv14,
+#gongjarueDiv22,
+#gongjarueDiv23,
+#gongjarueDiv24,
+#gongjarue1Img2,
+#gongjarue1Img3,
+#gongjarue2Img2,
+#gongjarue2Img5,
+#gongjarue3Img1,
+#gongjarue3Img2,
+#gongjarue4Img5,
+#gongjarue4Img6,
+#gongjarue4Img7{ 
+	margin-right: 1em;
+	width: 16em;
+	height: 9em;
+}
+#gongjarueDiv4,
+#gongjarueDiv8,
+#gongjarueDiv11,
+#gongjarueDiv15,
+#gongjarueDiv17,
+#gongjarueDiv19,
+#gongjarueDiv20,
+#gongjarueDiv21,
+#gongjarue1Img4,
+#gongjarue2Img3,
+#gongjarue2Img6,
+#gongjarue3Img3,
+#gongjarue3Img5,
+#gongjarue4Img2,
+#gongjarue4Img3,
+#gongjarue4Img4{
+	margin-right: 1em;
+	width:9em;
+	height:16em;
+} 
+#gongjarueDiv25,
+#gongjarueDiv9,
+#gongjarueDiv10,
+#gongjarue2Img4,
+#gongjarue2Img5,
+#gongjarue4Img8{ 
+	margin-right: 1em;
+	width: 48em;
+	height: 8em;
+}
+
+#gongjarueDiv1,
+#gongjarueDiv5,
+#gongjarueDiv6,
+#gongjarueDiv16,
+#gongjarueDiv18,
+#gongjarue1Img1,
+#gongjarue1Img5,
+#gongjarue2Img1,
+#gongjarue3Img4,
+#gongjarue4Img1{
+	width: 16em;
+	height : 16em; 
+	margin-right: 1em;
+}
+#picB1,
+#picB2,
+#picB3,
+#picB4,
+#picB5,
+#picB6,
+#picB7,
+#picB8,
+#picB9,
+#picB10,
+#picB11,
+#picB12,
+#picB13,
+#picB14,
+#picB15,
+#picB16,
+#picB17,
+#picB18,
+#picB19,
+#picB20,
+#picB21,
+#picB22,
+#picB23,
+#picB24{
+	position: absolute;
+	z-index: 1; 
+	margin-top: -70px;
+}
+
+#snB1,
+#snB2,
+#snB3,
+#snB4,
+#snB5,
+#snB6,
+#snB7,
+#snB8,
+#snB9,
+#snB10,
+#snB11,
+#snB12,
+#snB13,
+#snB14,
+#snB15,
+#snB16,
+#snB17,
+#snB18,
+#snB19,
+#snB20,
+#snB21,
+#snB22,
+#snB23,
+#snB24{
+	position: absolute;
+	z-index: 1;
+	margin-top: -30px;
+} 
+
+#gongjarueDiv1,
+#gongjarueDiv2,
+#gongjarueDiv3,
+#gongjarueDiv4,
+#gongjarueDiv5,
+#gongjarueDiv6,
+#gongjarueDiv7,
+#gongjarueDiv8,
+#gongjarueDiv9,
+#gongjarueDiv10,
+#gongjarueDiv11,
+#gongjarueDiv12{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+} 
+ 
+.gongjarueDataModal{
+	z-index: 9999;
+}
+#wrapper #content-wrapper { 
+	position: absolute;
+	width: 100%;
+	overflow-x: hidden;
+}

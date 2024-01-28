@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta name="author" content="">
+    <title>교수상담 개설</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/allVendors.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/sch/js/admin/cnsltExprn/consultList.js"></script>
+</head>
+
+<body>
+    <!-- ===== header ====== -->
+    <header id="header-html"></header>
+    <!-- ===== /header ====== -->
+    <div id="wrapper">
+        <!-- sidebar -->
+        <aside id="sidebar-html"></aside>
+        <!-- /sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content" class="pt-0">
+                <!-- ===== app ====== -->
+                <div id="app">
+                    <!-- ===== container ====== -->
+                    <div id="container" class="d-flex flex-column">
+                        <div class="container-fluid">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h1 mb-0 text-gray-800">교수상담 개설</h1>
+                            </div>
+                            <!-- ==== search ==== -->
+                            <div class="card shadow">
+                                <div class="card-body" id="">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="input-group dp_center mr-3 w-50">
+                                            <input type="text" v-model="searchData.searchText"
+                                                class="form-control inp_search" @keyup.enter="fnSearch()"
+                                                placeholder="검색어를 입력해주세요.">
+                                        </div>
+                                        <div class="ml-3 dp_center btn_search_width">
+                                            <div>
+                                                <button type="button" id=""
+                                                    class="form-control btn btn-info btn_search_width"
+                                                    @click="fnSearch">검색하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ==== /search ==== -->
+
+                            <!-- ==== searchList ==== -->
+                            <div class="row mb-4" style="padding-top: 40px;">
+                                <div class="col">
+                                    <div class="card shadow">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                 
+                                                <div class="table-responsive">
+                                                    <table id="tableList"
+                                                        class="table table-bordered  text-dark table-hover text-center">
+                                                        <colgroup></colgroup>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>순&nbsp;번</th>
+                                                                <th>교수&nbsp;명</th>
+                                                                <th>제&nbsp;목</th>
+                                                                <th>상담&nbsp; 형태</th>
+                                                                <th>상담생&nbsp;수</th>
+                                                                <th>기&nbsp;&nbsp;&nbsp;&nbsp;간</th>
+                                                                <th>상담&nbsp;&nbsp;요일</th>
+                                                                <th>상담&nbsp;&nbsp;시간</th>
+                                                                <th>상담&nbsp;&nbsp;횟수</th>
+                                                                <th>상담&nbsp;&nbsp;장소</th>
+                                                                <th>신청&nbsp;&nbsp;상태</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="(obj, idx) in cnsltList" v-if="cnsltList.length"
+                                                                v-bind:key="cnsltList.id">
+
+                                                                <td>{{totalCount - (searchData.pageNo - 1) * 10 -
+                                                                    idx}}</td>
+
+                                                                <!-- 교수명 -->
+                                                                <td><a href="javascript:;" class="link-style"
+                                                                        @click="fnDtail(obj.cnsltSeq, obj.cnsltSn)">{{obj.userNm}}</td>
+                                                                <td id="cnsltNm">{{obj.cnsltNm}}</a></td>
+                                                                <!-- 상담 형태 -->
+                                                                <td>{{obj.cnsltSeStr}}</td>
+                                                                <!-- 상담생수 -->
+                                                                <td>{{obj.cnsltCo}}<span>명</span></td>
+                                                                <!-- 기간 -->
+                                                                <td>{{obj.cnsltBeginDate}}
+                                                                        ~ {{obj.cnsltEndDate}}</td>
+                                                                <!-- 상담요일 -->
+                                                                <td>{{obj.cnsltWeekArray}}</td>
+                                                                <!-- 상담시간 -->
+                                                                <td>
+                                                                    {{obj.cnsltBeginTimeHour}}:{{obj.cnsltBeginTimeMinutes}}~{{obj.cnsltEndTimeHour}}:{{obj.cnsltEndTimeMinutes}}
+                                                                </td>
+
+                                                                <!-- 상담횟수 -->
+                                                                <!-- 시간이랑 요일 곱한 값으로 횟수를 처리해야 함 -->
+                                                                <td>{{obj.cnsltSeqCnt}}<span>회</span></td>
+                                                                <!-- 상담장소 -->
+                                                                <td>{{obj.cnsltPlaceNm}}</td>
+                                                                <!-- 신청상태 -->
+                                                                <td>{{obj.cnsltStatus}}</td>
+                                                            </tr>
+                                                            <tr v-else>
+                                                                <td colspan="11">조회된 데이터가 없습니다.</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <ul id="pagination" class="pagination justify-content-center"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="border-top m-4"></div>
+
+
+                                        <div class="dp_center justify-content-center mb-4">
+                                            <a href="/sch/admin/cnsltExprn/consultRegist.html"
+                                                class="btn-icon btn btn-dark btn_search_width">등록</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ==== /searchList ==== -->
+                        </div>
+                    </div>
+                    <!-- ===== /container ====== -->
+                </div>
+                <!-- ===== /app ====== -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+	<meta name="author" content="">
+	<title>메인</title>
+	<link href="/css/style.css" rel="stylesheet" />
+	<link href="/css/swiper.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<script src="/js/allVendors.js"></script>
+	<script src="/js/common.js"></script>
+	<script src="/sch/js/promotion/dashBoard/main.js"></script>
+	<link href="/css/dashboard/crosel2.css" rel="stylesheet" />
+	<style>
+		#programBox {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+		}
+
+		#loginBox {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+	</style>
+</head>
+
+<!-- ===== header ====== -->
+<header id="header-html"></header>
+<!-- ===== /header ====== -->
+<div id="wrapper">
+	<!-- sidebar -->
+	<aside id="sidebar-html"></aside>
+	<!-- ===== app ====== -->
+	<div id="app">
+		<!-- ===== container ====== -->
+		<div id="container" class="d-flex flex-column">
+			<div class="container-fluid">
+				<div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
+				<!-- 크로쉘-->
+				<div id="myCarousel" class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="carousel slide" data-bs-ride="carousel">
+				
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									
+									<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+										aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+										<rect width="100%" height="100%" rx="15" style="fill:antiquewhite;stroke:purple;stroke-width:3; "></rect>
+									</svg>
+									<div class="container">
+										<div class="carousel-caption  text-start">
+											<h1>혁신과 융합을 통한 초연결사회 융합형 인재양성
+											</h1>
+											<p>대학 내 학과 간, 대학 간의 경계를 허물고 문제해결 역량과 융합적 사고력을 갖춘 인재의 양성을</p>
+											<br>
+											<p>HUSS 인문사회 융합인재양성사업이 만들어 갑니다.</p>
+											<p>위험사회에 대한 국가전략 모색 융합인재양성 컨소시엄</p>
+											<p><a class="btn btn-outline-primary" href="/sch/admin/dashBoard/business.html">more</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+								<div class="carousel slide" data-bs-ride="carousel">
+								
+									<div class="carousel-inner">
+									<div class="carousel-item">
+										<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+											aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+											<rect width="100%" height="100%" rx="15" style="fill:antiquewhite;stroke:purple;stroke-width:3; "></rect>
+										</svg>
+										<div class="container">
+											<div class="carousel-caption text-end">
+												<h1>두번째
+												</h1>
+												<p>두번째 대학 내 학과 간, 대학 간의 경계를 허물고 문제해결 역량과 융합적 사고력을 갖춘 인재의 양성을</p>
+												<br>
+												<p>두번째 HUSS 인문사회 융합인재양성사업이 만들어 갑니다.</p>
+												<p>두번째 위험사회에 대한 국가전략 모색 융합인재양성 컨소시엄</p>
+												<p><a class="btn btn-outline-primary" href="/sch/admin/dashBoard/program.html">more</a></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> 
+							<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden"></span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden"></span>
+							</button>
+						</div>
+
+				
+			</div>
+				<!--======크로쉘======-->
+
+				<!---=========참여하기 및 로그인 ==============-->
+				<div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
+				<div class="row align-items-md-stretch">
+					<div class="col-md-6  align-items-center justify-content-between ">
+						<div id='programBox' class="h-100 p-2 text-white bg-dark rounded-3">
+							<div class="mr-2">
+								<h2>순천향대 인문사회 융합인재양성사업에</h2>
+								<h2>참여하시겠습니까?</h2>
+								<p>지금 바로 참여해 보세요!</p>
+							</div>
+							<button class="h-50 btn btn-outline-light" type="button"><a
+									href="/sch/admin/dashBoard/program.html">참여하기</a></button>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="loginBox" class="h-100 p-3 bg-light border rounded-3">
+
+							<div class="mr-2">
+								<p>학번</p>
+								<p>비밀번호</p>
+							</div>
+							<div class="mr-2" style="display: flex; flex-direction:column;">
+								<input type="text" placeholder="학번을 입력하세요." />
+								<input type="text" placeholder="비밀번호를 입력하세요." />
+							</div>
+							<button class="h-80 w-300 btn btn-outline-secondary" type="button"><a
+									href="/sch/admin/login/login.html">로그인</a></button>
+						</div>
+					</div>
+				</div>
+
+				<!---=========참여하기 및 로그인 ==============-->
+				<!---========= 스와이퍼 ==============-->
+		
+
+				<!--크로쉘-->
+
+				<!--크로쉘-->
+			</div>
+		</div>
+		<!-- ===== /container ====== -->
+	</div>
+</div>
+</body>
+
+</html>

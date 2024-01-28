@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta
+	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
+	name="description" />
+<meta name="author" content="">
+<title>갤러리 관리</title>
+<link href="/css/style.css" rel="stylesheet" />
+<script src="/js/allVendors.js"></script>
+<script src="/js/common.js"></script>
+<script src="/sch/js/admin/cnsltExprn/galleryManagement.js"></script>
+</head>
+<body>
+	<!-- ===== header ====== -->
+	<header id="header-html"></header>
+	<!-- ===== /header ====== -->
+	<div id="wrapper">
+    <!-- sidebar -->
+    <aside id="sidebar-html"></aside>
+    <!-- /sidebar -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content" class="pt-0">
+				<!-- ===== app ====== -->
+				<div id="app">
+					<!-- ===== container ====== -->
+					<div id="container" class="d-flex flex-column">
+						<div class="container-fluid">
+							<div
+								class="d-sm-flex align-items-center justify-content-between mb-4">
+								<h1 class="h1 mb-0 text-gray-800">갤러리 관리</h1>
+							</div>
+							<!-- ==== search ==== -->
+							<div class="card shadow">
+								<div class="card-body" id="">
+									<div class="d-flex align-items-center justify-content-center">
+										<div class="input-group dp_center mr-3 w-50">
+											<input type="text" v-model="searchData.searchText"
+												class="form-control inp_search" @keyup.enter="fnSearch()"
+												placeholder="검색어를 입력해주세요.">
+										</div>
+										<div class="ml-3 dp_center btn_search_width">
+											<div>
+												<button type="button" id=""
+													class="form-control btn btn-info btn_search_width"
+													@click="fnSearch">검색하기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- ==== /search ==== -->
+
+							<!-- ==== searchList ==== -->
+							<div class="row mb-4" style="padding-top: 40px;">
+								<div class="col">
+									<div class="card shadow">
+										<div class="card-body">
+											<div class="row">
+												 
+												<div class="table-responsive">
+							<table class="schedule_list text-center">
+							<colgroup><col style="width: 80px;"><col><col style="width: 60px;"><col style="width: 80px;"><col style="width: 50px;"><col style="width: 66px;"></colgroup>
+							<tr>
+								<td>
+									<img src="/assets/static/temporary_img3.0feaa09d.jpg" alt="">
+								</td>
+								<td>
+									<p class="text-left">
+										 즐거운 서예체험을 마쳤습니다. 작품 감상해보세요. <span><button class="btn_sm_basic bRed">NEW</button></span>
+									</p>
+								</td>
+								<td>
+									<p>
+										서예 체험
+									</p>
+								</td>
+								<td>
+									<p>
+										 2023.06.20<br>
+										 10:00 ~11:50
+									</p>
+								</td>
+								<td>
+									<p>
+										1회차
+									</p>
+								</td>
+								<td>
+									2023.06.27
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="/assets/static/Mask_group.3139f7ed.png" alt="">
+								</td>
+								<td>
+									<p class="text-left">
+										 즐거운 서예체험을 마쳤습니다. 작품 감상해보세요. <span><button class="btn_sm_basic bRed">NEW</button></span>
+									</p>
+								</td>
+								<td>
+									<p>
+										서예 체험
+									</p>
+								</td>
+								<td>
+									<p>
+										 2023.06.20<br>
+										 10:00 ~11:50
+									</p>
+								</td>
+								<td>
+									<p>
+										1회차
+									</p>
+								</td>
+								<td>
+									2023.06.27
+								</td>
+							</tr>
+							</table>
+													<ul id="pagination"
+														class="pagination justify-content-center"></ul>
+												</div>
+											</div>
+										</div>
+										<div class="border-top m-4"></div>
+										<div class="dp_center justify-content-center mb-4">
+											<a href="/sch/admin/cnsltExprn/galleryRegist.html"
+												class="btn-icon btn btn-dark btn_search_width">등록</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- ==== /searchList ==== -->
+						</div>
+					</div>
+					<!-- ===== /container ====== -->
+				</div>
+				<!-- ===== /app ====== -->
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

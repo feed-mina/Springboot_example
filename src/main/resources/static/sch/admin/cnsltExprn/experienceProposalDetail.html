@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta
+	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
+	name="description" />
+<meta name="author" content="">
+<title>다른 체험 제안 상세</title>
+<link href="/css/style.css" rel="stylesheet" />
+<script src="/js/allVendors.js"></script>
+<script src="/js/common.js"></script>
+<script src="/sch/js/admin/cnsltExprn/experienceProposalDetail.js"></script>
+</head>
+
+<body>
+
+	<!-- ===== header ====== -->
+	<header id="header-html"></header>
+	<!-- ===== /header ====== -->
+	<div id="wrapper">
+		<!-- sidebar -->
+		<aside id="sidebar-html"></aside>
+		<!-- /sidebar -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content" class="pt-0">
+				<!-- ===== app ====== -->
+				<div id="app">
+					<!-- ===== container ====== -->
+					<div id="container" class="d-flex flex-column">
+						<div class="container-fluid">
+							<!-- ===== container-fluid ====== -->
+							<div class="d-sm-flex  mb-4">
+								<h1 class="h1 mb-0 text-gray-800">다른 체험 제안 상세</h1>
+							</div>
+							<div class="col">
+								<!-- <div class="row mb-4" v-show="step == 'master'"> -->
+								<div class="row mb-4">
+
+									<div class="card shadow col">
+										<div class="card-body">
+											<div class="row justify-content-center mt25">
+												<div class="col">
+													<form class="d-flex justify-content-center col">
+														<div class="col tbl_col_typ1">
+															<table class="tableForm">
+																<tbody>
+																	<tr>
+																		<th>체험 종류</th>
+																		<td>
+																			<div id="otherProposalStr">
+																				{{otherExprnProposal.otherProposalStr}}</div>
+																		</td>
+
+																		<th>등록일</th>
+																		<td>
+																			<div class="side-by-side div-input">
+																				{{otherExprnProposal.registDt}}</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<th>작성자</th>
+																		<td colspan="3">
+																			<div id="userId">{{otherExprnProposal.userId}}
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<th>제안제목
+																		</th>
+																		<td colspan="3">
+																			<div id="exprnProposalSj"
+																				class="side-by-side div-input"
+																				style="text-align: initial;">
+																				&nbsp;&nbsp;&nbsp;&nbsp;
+																				{{otherExprnProposal.exprnProposalSj}}</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<th>제안내용
+																		</th>
+																		<td colspan="3">
+																			<div class="row-height-6" style="overflow-y: scroll;">
+																				<textarea id="exprnProposalSe" class="col-12"
+																					maxlength="2000" readonly="" style="height: 100%;">{{otherExprnProposal.exprnProposalCn}}</textarea>
+																			</div>
+
+																		</td>
+																	</tr>
+
+																</tbody>
+															</table>
+														</div>
+													</form>
+													
+													<div class="d-flex justify-content-center">
+														<div class="d-flex justify-content-center">
+															<div class="pr-5">
+																<a href="/sch/admin/cnsltExprn/experienceProposal.html"
+																	class="btn btn-dark btn-icon btn_search_width">
+																	<span class="text">목록</span>
+																</a>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- ===== /container-fluid ====== -->
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== /container ====== -->
+			</div>
+			<!-- ===== /app ====== -->
+		</div>
+	</div>
+
+
+</body>
+
+</html>

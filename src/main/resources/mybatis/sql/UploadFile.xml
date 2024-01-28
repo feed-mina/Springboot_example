@@ -2,10 +2,10 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.so.java.mvc.repository.UploadFileRepository">
+<mapper namespace="kr.so.mvc.repository.UploadFileRepository">
  
 	<insert id="save"
-		parameterType="kr.so.java.mvc.parameter.UploadFileParameter">
+		parameterType="kr.so.mvc.parameter.UploadFileParameter">
 		INSERT INTO T_UPLOAD_FILE
 		(
 		PATHNAME,

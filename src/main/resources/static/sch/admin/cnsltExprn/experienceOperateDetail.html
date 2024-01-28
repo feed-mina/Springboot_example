@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta
+	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
+	name="description" />
+<meta name="author" content="">
+<title>체험예약 운영 상세</title>
+<link href="/css/style.css" rel="stylesheet" />
+<script src="/js/allVendors.js"></script>
+<script src="/js/common.js"></script>
+<script src="/sch/js/admin/cnsltExprn/experienceOperateDetailTest.js"></script>
+</head>
+
+<body>
+
+	<!-- ===== header ====== -->
+	<header id="header-html"></header>
+	<!-- ===== /header ====== -->
+	<div id="wrapper">
+		<!-- sidebar -->
+		<aside id="sidebar-html"></aside>
+		<!-- /sidebar -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content" class="pt-0">
+				<!-- ===== app ====== -->
+				<div id="app">
+					<!-- ===== container ====== -->
+					<div id="container" class="d-flex flex-column">
+						<div class="container-fluid">
+							<!-- ===== container-fluid ====== -->
+							<div
+								class="d-sm-flex align-items-center justify-content-between mb-4">
+								<h1 class="h1 mb-0 text-gray-800">체험예약 운영 상세</h1>
+							</div>
+							<div class="col">
+								<!-- <div class="row mb-4" v-show="step == 'master'"> -->
+								<div class="row mb-4">
+
+									<div class="card shadow col">
+										<div class="card-body">
+											<div class="row justify-content-center mt25">
+												<div class="col">
+													<form class="d-flex justify-content-center col">
+														<div class="col tbl_col_typ1">
+															<table class="tableForm">
+																<tbody>
+																	<tr>
+																		<!-- ===== 체험 종류 ====== -->
+																		<th class="col-sm-2">체험 종류</th>
+																		<td>{{exprnData.exprnKndCodeStr}}
+																		<th class="col-sm-2">체험생 수</th>
+																		<td>{{exprnData.exprnCo}}명</td>
+																	</tr>
+																	<tr>
+																		<th>체험 장소</th>
+																		<td colspan="3">
+																			<div id="exprnPlaceNm">
+																				{{exprnData.exprnPlaceNm}}</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<th>체험 날짜</th>
+																		<td>
+																			<div class="input-group flex-nowrap bx_calendar">
+																				<div class="side-by-side div-input">
+																					{{exprnData.exprnDate}}</div>
+																			</div>
+																		</td>
+																		<th>체험 요일</th>
+																		<!-- ===== 체험요일 ====== -->
+																		<td><input type="checkbox" disabled
+																			block class="exprnWeekArray" name="exprnWeekArray"
+																			id="monday" v-model="exprnData.exprnWeekArray"
+																			value="1" /> <label for="monday"
+																			class="form-check-label">월</label>&nbsp;&nbsp;&nbsp;
+																			<input type="checkbox" disabled block
+																			class="exprnWeekArray" name="exprnWeekArray"
+																			id="tuesday" v-model="exprnData.exprnWeekArray"
+																			value="2" /> <label for="tuesday"
+																			class="form-check-label">화</label>&nbsp;&nbsp;&nbsp;
+																			<input type="checkbox" disabled block
+																			class="exprnWeekArray" name="exprnWeekArray"
+																			id="wednesday" v-model="exprnData.exprnWeekArray"
+																			value="3" /> <label for="wednesday"
+																			class="form-check-label">수</label>&nbsp;&nbsp;&nbsp;
+																			<input type="checkbox" disabled block
+																			class="exprnWeekArray" name="exprnWeekArray"
+																			id="thursday" v-model="exprnData.exprnWeekArray"
+																			value="4" /> <label for="thursday"
+																			class="form-check-label">목</label>&nbsp;&nbsp;&nbsp;
+																			<input type="checkbox" disabled block
+																			class="exprnWeekArray" name="exprnWeekArray"
+																			id="friday" v-model="exprnData.exprnWeekArray"
+																			value="5" /> <label for="friday"
+																			class="form-check-label">금</label>&nbsp;&nbsp;&nbsp;
+																			<input type="checkbox" disabled block
+																			class="exprnWeekArray" name="exprnWeekArray"
+																			id="saturday" v-model="exprnData.exprnWeekArray"
+																			value="6" /> <label for="saturday"
+																			class="form-check-label">토</label></td>
+																	</tr>
+
+																	<tr>
+																		<th class="col-sm-2">체험시간</th>
+																		<td colspan="3">
+																			<div class="input-group flex-nowrap">
+																				{{exprnData.exprnBeginTimeHour}}:{{exprnData.exprnBeginTimeMinutes}}
+																				~{{exprnData.exprnEndTimeHour}}:{{exprnData.exprnEndTimeMinutes}}
+																			</div>
+																		</td>
+																	</tr>
+
+																	<!-- ===== 모집기간 ====== -->
+																	<tr>
+																		<th>모집 기간</th>
+																		<td colspan="3">
+																			<div class="input-group flex-nowrap">
+																				<div class="side-by-side div-input">
+																					{{exprnData.rcritBeginDate}}</div>
+																				<div class="side-by-side div-input-sm">
+																					{{exprnData.rcritBeginHour}}</div>
+																				<div class="side-by-side div-input-sm">
+																					{{exprnData.rcritBeginMinutes}}</div>
+																				&nbsp;&nbsp; &nbsp;&nbsp; ~ &nbsp;&nbsp;
+																				&nbsp;&nbsp;
+																				<div class="side-by-side div-input">
+																					{{exprnData.rcritEndDate}}</div>
+																				<div class="side-by-side div-input-sm">
+																					{{exprnData.rcritEndHour}}</div>
+																				<div class="side-by-side div-input-sm">
+																					{{exprnData.rcritEndMinutes}}</div>
+																			</div>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+
+														</div>
+													</form>
+													<div
+														style="display: flex; justify-content: space-evenly; align-items: center;">
+														<div style="text-wrap: nowrap;">
+															체험 신청자 수 : <span
+																style="font-size: larger; text-decoration-line: underline; font-weight: bolder;">{{exprnData.exprnUserCount}}&nbsp;
+																명</span>
+														</div>
+														<img src="/image/excel_file_download.svg" width="50"
+															id="btnFileDownloadForRegister" class="link-style" />
+
+														<div style="text-wrap: nowrap;">
+															체험 수료자수 : <span
+																style="font-size: larger; text-decoration-line: underline; font-weight: bolder;">{{exprnData.exprnParticipantsCnt}}&nbsp;명
+															</span>
+														</div>
+														<img src="/image/excel_file_download.svg" width="50"
+															id="btnFileDownloadForParticipants" class="link-style" />
+
+													</div>
+													<table id="exprnCrftTable"
+														class="table table-bordered table-hover text-center"
+														width="100%" style="margin-top: 40px;">
+
+														<thead>
+															<tr>
+																<th>성명</th>
+																<th>회원종류</th>
+																<th>학과/소속</th>
+																<th>신청일시</th>
+																<th>체험여부</th>
+															</tr>
+														</thead>
+														<tbody>
+
+															<tr v-for="(obj, idx) in exprnUserArrayList"
+																v-if="exprnUserArrayList.length"
+																v-bind:key="exprnUserArrayList.id">
+																<td>{{obj.userNm}}</td>
+																<td>{{obj.userAuthorStr}}</td>
+																<td>{{obj.psitnNm}} {{obj.userInnb}}</td>
+																<td class=" text-center">{{obj.reqstDt}}</td>
+																<td colspan="1" id="updateExprnAttenderTd">
+
+																	<div id="UsefInfoLine">
+																		<div id="boxForUserList" style="display: flex;"></div>
+																		<div id="boxForParticipantsList"
+																			style="display: flex;"></div>
+																	</div>
+																	<div v-for="obj in exprnUserArrayList" :key="obj.id">
+																		<div class="" id="updateExprnAttenderDiv">
+																			<button class="change-status-button"
+																				id="updateExprnAttenderButton"
+																				:disabled="isButtonDisabled(obj.exprnSttusSe)"
+																				:style="[defaultButtonStyle, conditionButtonStyle(obj.exprnSttusSe)]"
+																				@click="fnUpdateExprnAttender(obj)">{{obj.exprnSttusSeStr}}</button>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr v-else>
+																<td colspan="14">조회된 데이터가 없습니다.</td>
+															</tr>
+														</tbody>
+													</table>
+													
+													<div class="d-flex justify-content-center">
+														<div class="d-flex justify-content-center">
+															<div class="pr-5">
+																<a href="/sch/admin/cnsltExprn/experienceFx.html"
+																	class="btn btn-dark btn-icon btn_search_width"> <span
+																	class="text">목록</span>
+																</a>
+															</div>
+															<div class="pr-5" id="btnUpdateExprn"></div>
+														<div class="" id="btnDeleteExprn"></div>
+														<div class="" id="btnCancelExprn"></div> 
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- ===== /container-fluid ====== -->
+
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== /container ====== -->
+			</div>
+			<!-- ===== /app ====== -->
+		</div>
+	</div>
+
+
+</body>
+
+</html>
