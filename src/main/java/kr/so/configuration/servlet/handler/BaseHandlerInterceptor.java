@@ -6,14 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.so.configuration.exception.BaseException;
 import kr.so.configuration.http.BaseResponseCode;
 import kr.so.framework.data.web.RequestConfig;
-import kr.so.mvc.domain.MenuType;
-
 public class BaseHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	
@@ -37,6 +34,9 @@ public class BaseHandlerInterceptor extends HandlerInterceptorAdapter {
 	  	return true;
 	  }
 	
+/*
+ * 
+import kr.so.mvc.domain.MenuType;
 
 	  @Override
 	  public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -49,5 +49,5 @@ public class BaseHandlerInterceptor extends HandlerInterceptorAdapter {
 		  }
 	  	logger.info("postHandle requestURI : {}", request.getRequestURI());
 	  }
- 
+ */
 }

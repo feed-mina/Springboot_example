@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 import kr.so.configuration.security.JwtTokenProvider;
 import kr.so.encrypt.AES256Encrypt;
 import kr.so.encrypt.SHA256Encrypt;
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 import kr.so.service.LoginService;
 import kr.so.util.CamelHashMap;
 import kr.so.util.CommonResponse;

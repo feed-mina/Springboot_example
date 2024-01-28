@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import kr.so.mvc.domain.BaseCodeLabelEnum;
+import kr.so.util.BaseCodeLabelEnum;
 
 // JSON 변환 시 BaseCodeLabelEnum 클래시에 대한 변환을 동일하게 처리
 /* Enum 장점

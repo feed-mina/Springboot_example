@@ -2,9 +2,10 @@ package kr.so;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching; 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 /**  @SpringBootApplication 은 Spring Boot 애플리케이션의 주요 설정을 담당하는 어노테이션이다. 
@@ -27,6 +28,16 @@ public class ExampleSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExampleSpringApplication.class, args);
 	}
+
+	@RequestMapping("/")
+	public String index(){
+		return "Hello Word\n";
+	}
+
+	@GetMapping("/dashboard")
+		public String goDashBoard(){
+			return "redirect:/kr/so/dashboard/main.html";
+		}
 
 }
 

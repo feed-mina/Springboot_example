@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
 
 	//	ApiSelectorBuilder apis = docket.select().apis(RequestHandlerSelectors.basePackage("kr.so.mvc.controller"));
 	
-		ApiSelectorBuilder apis = docket.select().apis(RequestHandlerSelectors.basePackage("kr.so.mvc.controller"));
+		ApiSelectorBuilder apis = docket.select().apis(RequestHandlerSelectors.basePackage("kr.so.controller"));
 		apis.paths(PathSelectors.ant("/**"));
 		
 		return apis.build();

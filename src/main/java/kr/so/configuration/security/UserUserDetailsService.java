@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 import kr.so.util.CommonUtil;
 
 @Service

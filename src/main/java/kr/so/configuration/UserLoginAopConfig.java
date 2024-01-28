@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 
 @Aspect
 @Component

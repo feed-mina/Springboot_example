@@ -10,18 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.so.mvc.service.CommonService;
-import kr.so.service.DashboardService;
-import kr.so.util.CommonResponse;
-import kr.so.util.UserParam;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import kr.so.service.CommonService;
+import kr.so.service.DashboardService;
+import kr.so.util.CommonResponse;
+import kr.so.util.UserParam;
 
 @Api(tags = " Dashboard - 대시보드")
 @RestController
@@ -36,6 +36,20 @@ public class DashboardController {
 	@Autowired
 	CommonService commonService;
 
+
+	@RequestMapping("/")
+	public String index(){
+		return "Hello Word\n";
+	}
+
+	@GetMapping("/dashboard")
+		public String goDashBoard(){
+		return "...";	
+		//return "redirect:/kr/so/dashboard/main.html";
+		}
+
+ 
+	
 	@PostMapping(value = "/selectCountUserSignUpSomeday.api")
 	@ApiOperation(value = "특정일자에 회원가입한 사용자 수 조회", notes = "특정일자에 회원가입한 사용자 수")
 	@ApiImplicitParam(name = "paramMap", required = true, dataTypeClass = String.class, value = "{\r\n" + //

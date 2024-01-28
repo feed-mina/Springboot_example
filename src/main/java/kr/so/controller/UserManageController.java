@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 import kr.so.service.UserManageService;
 import kr.so.util.CommonResponse;
 import kr.so.util.UserParam;

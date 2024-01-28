@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+		<!-- login.setDeviceToken 로그인시 디바이스토큰 세팅-->
+	<insert id="setDeviceToken" parameterType="map">
+		UPDATE tb_user
+		SET 
+			device_token = #{deviceToken}
+			,app_os = #{appOs}
+		WHERE user_seq = #{userSeq}
+	</insert>
+
+	<!-- login.adminRegist -->
+	<insert id="userRegist" parameterType="map">
+		<selectKey resultType="String" keyProperty="userSeq" order="BEFORE">
+			select sch.fn_nextval('USER')
+		</selectKey>
+
+		INSERT INTO tb_user
+			(
+				user_seq
+				,user_email
+				,user_nm
+				,user_ncnm
+				,user_password
+
+				,user_author
+				,use_at
+				,psitn_nm
+				,user_innb
+				,mbtlnum
+
+				,brthdy
+				,sexdstn
+				,atnlc_sbject_nm
+				,zip
+				,main_adres
+				,detail_adres
+
+				,profsr_hist
+				,proof_image_cn
+				,profl_image_cn
+				,profl_color
+				,lang
+
+				,qestn_code
+				,qestn_rspns
+				,regist_id
+				,regist_dt
+				,updt_id
+				,updt_dt
+			)
+		VALUES      
+			(
+				#{userSeq}
+				,#{userEmail}
+				,#{userNm}
+				,#{userNcnm}
+				,#{userPasswordEnc}
+
+				,#{userAuthor}
+				,'N' <!-- 회원가입할때는 일단 사용하지않음으로 설정 -->
+				,#{psitnNm}
+				,#{userInnb}
+				,#{mbtlnum}
+
+				,#{brthdy}
+				,#{sexdstn}
+				,#{atnlcSbjectNm}
+				,#{zip}
+				,#{mainAdres}
+				,#{detailAdres}
+
+				,#{profsrHist}
+				,#{proofImageCn}
+				,#{proflImageCn}
+				,#{proflColor}
+				,#{lang}
+
+				,#{qestnCode}
+				,#{qestnRspns}
+				,NULL
+				,CURRENT_TIMESTAMP()
+				,NULL
+				,CURRENT_TIMESTAMP()
+			)
+	</insert>
+
+	<!-- login.userUpdate -->
+	<update id="userUpdate" parameterType="map">
+		UPDATE tb_user
+		SET
+			updt_id = #{user.userSeq}
+			,updt_dt = CURRENT_TIMESTAMP()
+
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(userAuthor)'>
+				,user_author = #{userAuthor} 
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(userNm)'>
+				,user_nm = #{userNm}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(userNcnm)'>
+				,user_ncnm = #{userNcnm}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(userEmail)'>
+				,user_email = #{userEmail}
+			</if>
+
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(qestnCode) and @com.sch.util.CommonUtil@isNotEmpty(qestnRspns)'>
+				,qestn_code = #{qestnCode}
+				,qestn_rspns = #{qestnRspns}
+			</if>
+
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(psitnNm)'>
+				,psitn_nm = #{psitnNm} <!-- 소속, 학교 -->
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(userInnb)'>
+				,user_innb = #{userInnb} <!-- 사번, 학번 -->
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(lang)'>
+				,lang = #{lang} <!-- 언어 국적 -->
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(mbtlnum)'>
+				,mbtlnum = #{mbtlnum}
+			</if>
+
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(proofImageCn)'>
+				,proof_image_cn = #{proofImageCn} <!-- 직원증 사진 -->
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(proflImageCn)'>
+				,profl_image_cn = #{proflImageCn} <!-- 프로필 사진 -->
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(proflColor)'>
+				,profl_color = #{proflColor}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(brthdy)'>
+				,brthdy = #{brthdy}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(sexdstn)'>
+				,sexdstn = #{sexdstn}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(zip) and @com.sch.util.CommonUtil@isNotEmpty(mainAdres) and @com.sch.util.CommonUtil@isNotEmpty(detailAdres)'>
+				,zip = #{zip}
+				,main_adres = #{mainAdres}
+				,detail_adres = #{detailAdres}
+			</if>
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(atnlcSbjectNm)'>
+				,atnlc_sbject_nm = #{atnlcSbjectNm}
+			</if>
+		WHERE user_seq = #{userSeq}
+	</update>
+
+	<!-- login.userDelete -->
+	<update id="userDelete" parameterType="map">
+		UPDATE tb_user
+		SET
+			use_at = 'D'
+		WHERE user_seq = #{user.userSeq}
+	</update>
+
+	<update id="userUpgrade" parameterType="map">
+		UPDATE tb_user
+		SET
+			user_author = #{userAuthor}
+			,brthdy = #{brthdy}
+			,sexdstn = #{sexdstn}
+			,atnlc_sbject_nm = #{atnlcSbjectNm}
+			,zip = #{zip}
+			,main_adres = #{mainAdres}
+			,detail_adres = #{detailAdres}
+			,psitn_nm = #{psitnNm}
+			,user_innb = #{userInnb}
+			,lang = #{lang}
+			,mbtlnum = #{mbtlnum}
+			,proof_image_cn = #{proofImageCn}
+			,profl_image_cn = #{proflImageCn}
+			,profl_color = #{proflColor}
+		WHERE user_seq = #{userSeq}
+	</update>
+
+	<update id="userUpgradeConfirm" parameterType="map">
+		UPDATE tb_user
+		SET 
+			user_author = (SELECT user_author_reqst FROM tb_user WHERE user_seq = #{userSeq})
+			,user_author_reqst = NULL <!-- 임시값은 null로 환원 -->
+		WHERE user_seq = #{userSeq}
+	</update>
+
+	<update id="userPasswordUpdate" parameterType="map">
+		UPDATE tb_user
+		SET user_password = #{userPassword}
+		WHERE user_seq = #{userSeq}
+	</update>
+
+	<insert id="userStplat" parameterType="map">
+		INSERT INTO sch.tb_user_stplat
+			(
+				user_seq
+				,stplat_code
+				,agre_at
+				,regist_dt
+				,updt_dt
+			)
+		VALUES  
+			(
+				#{userSeq}
+				,#{stplatCode}
+				,#{agreAt}
+				,CURRENT_TIMESTAMP()
+				,CURRENT_TIMESTAMP()
+			)
+	</insert>
+
+	<update id="userStplatUpdate" parameterType="map">
+		UPDATE sch.tb_user_stplat
+		SET
+			agre_at = #{agreAt}
+			,updt_dt = CURRENT_TIMESTAMP()
+		WHERE
+			user_seq = #{userSeq} AND
+			stplat_code = #{stplatCode}
+	</update>
+
+	
+	<select id="userIdFind" parameterType="map" resultType="camelHashMap">
+		SELECT * from sch.tb_user
+		WHERE 
+			user_nm = #{userNm} 
+			AND qestn_code = #{qestnCode} 
+			AND qestn_rspns = #{qestnRspns}
+	</select>
+
+	<select id="userPwFind" parameterType="map" resultType="camelHashMap">
+		SELECT * from tb_user
+		WHERE 
+			user_seq  = #{user_seq} 
+			AND qestn_code = #{qestnCode} 
+			AND qestn_rspns = #{qestnRspns}
+	</select>
+
+	<select id="policyList" parameterType="map" resultType="camelHashMap">
+		SELECT * FROM tb_cmmn_code WHERE upper_cmmn_code = 'POLICY' ORDER BY sort_sn ASC
+	</select>
+
+	<update id="useAtUpdate" parameterType="map">
+		UPDATE sch.tb_user
+		SET
+			use_at = #{useAt}
+		WHERE
+			user_seq = #{userSeq}
+	</update>
+
+	<!-- 탈퇴유저 미포함 -->
+	<select id="selectLoginMap" parameterType="map" resultType="camelHashMap">
+		<!-- login.selectLoginMap -->
+		SELECT * FROM tb_user 
+		WHERE user_seq = #{user.userSeq}
+			AND use_at = 'Y'
+	</select>
+	
+	<!-- 탈퇴유저 포함하며 로그인할때 사용 -->
+	<select id="selectLogin" parameterType="map" resultType="camelHashMap">
+		SELECT * FROM tb_user 
+		WHERE user_email = #{userEmail}
+			<!-- AND use_at = 'Y' -->
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(admin)'>
+				<if test='userType = "admin"'>
+					AND user_author IN ('SA', 'PR', 'AP')
+				</if>
+				<if test='userType = "mber"'>
+					AND user_author NOT IN ('G', 'ST', 'TJ', 'FF', 'ETA', 'ETB', 'ETC')
+				</if>
+			</if>
+
+	</select>
+
+	<select id="questionList" parameterType="map" resultType="camelHashMap">
+		SELECT * FROM tb_cmmn_code WHERE upper_cmmn_code = 'QUESTION' ORDER by sort_sn ASC
+	</select>
+
+	<insert id="loginDt" parameterType="map">
+		INSERT INTO sch.tb_user_login
+			VALUES(#{userSeq}, current_timestamp(), current_timestamp());
+	</insert>
+
+	<update id="updateLoginDt" parameterType="map">
+		UPDATE sch.tb_user_login
+			SET end_dt = current_timestamp()
+			WHERE user_seq = #{user.userSeq} 
+			AND login_dt = (
+				SELECT MAX(login_dt) FROM sch.tb_user_login
+				WHERE user_seq = #{user.userSeq}
+			)
+	</update>
+
+	<select id="selectCheckExist" parameterType="map" resultType="camelHashMap">
+		SELECT * FROM sch.tb_user 
+		WHERE (1=1)
+			AND CASE
+				WHEN #{checkEntity} = 'userNcnm' THEN user_ncnm = #{userNcnm}
+				WHEN #{checkEntity} = 'userEmail' THEN user_email = #{userEmail}
+				WHEN #{checkEntity} = 'userInnb' THEN user_innb = #{userInnb}
+				ELSE true
+			END
+			<if test='@com.sch.util.CommonUtil@isNotEmpty(exceptMe)'>
+				AND user_seq != #{exceptMe}
+			</if>
+	</select>
+	
+	<select id="appVerChk" parameterType="map" resultType="camelHashMap">
+		SELECT
+			app_ver
+			, is_confirm
+		FROM tb_app_data
+		ORDER BY regist_dt DESC
+		LIMIT 1
+	</select>
+	
+</mapper>

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.so.encrypt.AES256Encrypt;
-import kr.so.mvc.service.CommonService;
 import kr.so.util.CommonUtil;
 import kr.so.util.JSONObject;
 

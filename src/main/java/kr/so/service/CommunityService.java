@@ -1,11 +1,12 @@
 package kr.so.service;
 
-import kr.so.dao.CommonDao;
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Map;
+import kr.so.dao.CommonDao;
 
 @Service
 public class CommunityService {

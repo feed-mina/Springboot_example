@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan(basePackages = " kr.so.mvc.repository")
 public class MybatisConfiguration {
 
-	@Bean
+	
+@Bean(name = "mybatisSqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(@Autowired DataSource dataSource, ApplicationContext applicationContext) throws Exception{
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);

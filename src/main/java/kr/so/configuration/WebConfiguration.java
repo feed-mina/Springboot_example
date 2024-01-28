@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -33,7 +32,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import kr.so.configuration.security.JwtTokenProvider;
 import kr.so.configuration.servlet.handler.BaseHandlerInterceptor;
 import kr.so.framework.data.web.PageRequestHandleMethodArgumentResolver;
-import kr.so.mvc.domain.BaseCodeLabelEnum;
+import kr.so.util.BaseCodeLabelEnum;
 import kr.so.util.CommonUtil;
 import kr.so.util.UserParam;
 

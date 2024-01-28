@@ -49,9 +49,8 @@ import io.swagger.annotations.ApiOperation;
 import kr.so.configuration.security.JwtTokenProvider;
 import kr.so.encrypt.AES256Encrypt;
 import kr.so.encrypt.SHA256Encrypt;
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 import kr.so.service.FileService;
-import kr.so.service.TranslateService;
 import kr.so.util.CamelHashMap;
 import kr.so.util.CommonResponse;
 import kr.so.util.CommonUtil;
@@ -75,9 +74,7 @@ public class TestController {
 	
 	@Autowired
 	FileService fileService;
-
-	@Autowired
-	TranslateService translateService;
+ 
 
 	@Value("${file.upload-dir}")
 	private String uploadDir;
@@ -491,16 +488,7 @@ public class TestController {
 		}
 		
 		// 알람 테스트 종료
-	
-	@PostMapping("/google/trans")
-	public ResponseEntity<?> wer(@RequestBody Map<String, Object> paramMap) {
-		//
-		Map<String, Object> com = translateService.getTranslatedMap(
-				(String) paramMap.get("text"),
-				(String) paramMap.get("source"),
-				(String) paramMap.get("target"));
-		return CommonResponse.statusResponse(HttpServletResponse.SC_OK, com);
-	}
+ 
 
 	@GetMapping("/sdfdf")
 	public ResponseEntity<?> sfs(@RequestBody Map<String, Object> paramMap) {

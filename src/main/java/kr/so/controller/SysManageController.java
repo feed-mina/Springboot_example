@@ -23,7 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import kr.so.configuration.security.JwtTokenProvider;
-import kr.so.mvc.service.CommonService;
+import kr.so.service.CommonService;
 import kr.so.service.FileService;
 import kr.so.service.SysManageService;
 import kr.so.util.CommonResponse;

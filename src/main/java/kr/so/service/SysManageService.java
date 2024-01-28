@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.so.dao.CommonDao;
-import kr.so.mvc.service.CommonService;
 
 @Service
 public class SysManageService {
